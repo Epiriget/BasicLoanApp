@@ -1,7 +1,6 @@
 package com.example.basicloanapp.di
 
-import com.example.basicloanapp.LoanApplication
-import com.example.basicloanapp.MainActivity
+import com.example.basicloanapp.ui.MainActivity
 import dagger.Component
 import javax.inject.Singleton
 
