@@ -3,9 +3,9 @@ package com.example.basicloanapp
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import android.widget.TextView
+import com.example.basicloanapp.data.LoanRepository
 import com.example.basicloanapp.service.LoanService
-import com.example.basicloanapp.service.LoginRequest
+import com.example.basicloanapp.service.AuthRequest
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -14,7 +14,7 @@ import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
     @Inject
-    lateinit var service: LoanService
+    lateinit var repository: LoanRepository
 
     private val disposables = CompositeDisposable()
 
@@ -24,13 +24,13 @@ class MainActivity : AppCompatActivity() {
         (application as LoanApplication).repositoryComponent.inject(this)
 
 
-        disposables.add(service.login(LoginRequest("PostmanTestName", "postman_pass"))
+        disposables.add(repository.login("PostmanTestName", "postman_pass")
             .subscribeOn(Schedulers.io())
             .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
                     Log.d("MainActivity", "Success")
-                    text.text = it.authString
+                    text.text = it
                 },
                 {
                     Log.d("MainActivity", "Error")

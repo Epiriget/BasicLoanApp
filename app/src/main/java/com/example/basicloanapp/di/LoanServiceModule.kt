@@ -4,9 +4,7 @@ import com.example.basicloanapp.service.LoanService
 import com.google.gson.GsonBuilder
 import dagger.Module
 import dagger.Provides
-import okhttp3.Interceptor
 import okhttp3.OkHttpClient
-import okhttp3.Response
 import okhttp3.logging.HttpLoggingInterceptor
 import retrofit2.Retrofit
 import retrofit2.adapter.rxjava2.RxJava2CallAdapterFactory
@@ -23,22 +21,15 @@ class LoanServiceModule {
         interceptor.level = HttpLoggingInterceptor.Level.BODY
 
         val client = OkHttpClient.Builder()
-            .addInterceptor(object : Interceptor {
-                override fun intercept(chain: Interceptor.Chain): Response {
-                    val request = chain.request().newBuilder().build()
-                    val response = chain.proceed(request)
-                    return response
-                }
-            })
             .addInterceptor(interceptor)
             .build()
 
         return Retrofit.Builder()
             .baseUrl("http://focusapp-env.eba-xm2atk2z.eu-central-1.elasticbeanstalk.com/")
             .client(client)
-            .addConverterFactory(provideGSON())
             .addConverterFactory(ScalarsConverterFactory.create())
-            .addCallAdapterFactory(provideRXCallAdapter())
+            .addConverterFactory(provideGSON())
+            .addCallAdapterFactory(RxJava2CallAdapterFactory.create())
             .build()
             .create(LoanService::class.java)
     }
@@ -50,8 +41,4 @@ class LoanServiceModule {
         .setLenient()
         .create()
     )
-
-    @Provides
-    @Singleton
-    fun provideRXCallAdapter(): RxJava2CallAdapterFactory = RxJava2CallAdapterFactory.create()
 }
