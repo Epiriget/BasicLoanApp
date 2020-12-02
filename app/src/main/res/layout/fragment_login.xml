@@ -1,10 +1,11 @@
 <?xml version="1.0" encoding="utf-8"?>
-<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
-    xmlns:app="http://schemas.android.com/apk/res-auto"
+<androidx.constraintlayout.widget.ConstraintLayout
+    xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".ui.RegistrationFragment">
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    tools:context=".ui.LoginFragment">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -19,12 +20,12 @@
         <com.google.android.material.textview.MaterialTextView
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/label_register_new_profile"
+            android:text="@string/label_sign_in"
             android:layout_marginBottom="20dp"
             style="@style/TextAppearance.AppCompat.Headline" />
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/registration_name_input"
+            android:id="@+id/login_name_input"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -39,7 +40,7 @@
         </com.google.android.material.textfield.TextInputLayout>
 
         <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/registration_password_input"
+            android:id="@+id/login_password_input"
             style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
@@ -54,26 +55,10 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
-        <com.google.android.material.textfield.TextInputLayout
-            android:id="@+id/registration_repeat_password_input"
-            style="@style/Widget.MaterialComponents.TextInputLayout.FilledBox"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:hint="@string/hint_repeat_password"
-            app:endIconMode="password_toggle"
-            app:errorEnabled="true">
-
-            <com.google.android.material.textfield.TextInputEditText
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:inputType="textPassword" />
-
-        </com.google.android.material.textfield.TextInputLayout>
-
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/redirect_to_login"
-            android:text="@string/redirect_to_login_text"
+            android:id="@+id/redirect_to_create"
+            android:text="@string/redirect_to_create_text"
             style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
@@ -82,12 +67,11 @@
 
         <Button
             android:layout_marginTop="12dp"
-            android:id="@+id/button_register"
+            android:id="@+id/button_login"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:text="@string/register_button"
-        />
-
+            android:text="@string/login_button"
+            />
     </LinearLayout>
 
 </androidx.constraintlayout.widget.ConstraintLayout>
