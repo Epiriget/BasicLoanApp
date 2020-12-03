@@ -11,4 +11,5 @@
     <string name="label_sign_in">Sign in</string>
     <string name="redirect_to_create_text">Create new profile</string>
     <string name="login_button">Login</string>
+    <string name="registration_error">Some error occurred</string>
 </resources>
