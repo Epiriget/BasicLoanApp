@@ -12,4 +12,11 @@
         android:name="com.example.basicloanapp.ui.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" />
+
+
+    <fragment
+        android:id="@+id/loginFragment"
+        android:name="com.example.basicloanapp.ui.LoginFragment"
+        android:label="fragment_login"
+        tools:layout="@layout/fragment_login" />
 </navigation>

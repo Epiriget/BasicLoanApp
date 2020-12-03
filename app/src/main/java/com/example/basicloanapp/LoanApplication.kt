@@ -8,7 +8,8 @@ class LoanApplication: Application() {
     override fun onCreate() {
         super.onCreate()
         repositoryComponent = DaggerGraphComponent.builder()
-            .applicationModule(ApplicationModule(this))
+            .context(this)
+//            .applicationModule(ApplicationModule(this))
             .build()
     }
 }

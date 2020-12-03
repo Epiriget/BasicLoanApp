@@ -7,10 +7,10 @@ import javax.inject.Singleton
 
 
 @Module
-class ApplicationModule(private val application: Application) {
+class ApplicationModule() {
     @Singleton
     @Provides
-    fun application(): Application {
+    fun application(application: Application): Application {
         return application
     }
 }
