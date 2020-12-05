@@ -10,6 +10,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.basicloanapp.LoanApplication
 
 import com.example.basicloanapp.R
+import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_registration.*
 import kotlinx.android.synthetic.main.fragment_registration.view.*
 import javax.inject.Inject
@@ -35,27 +36,28 @@ class RegistrationFragment : Fragment() {
                         registration_repeat_password_input.editText?.text.toString())
         }
 
-        model.notValidDescription.observe(viewLifecycleOwner, Observer {
+        model.validationResult.observe(viewLifecycleOwner, Observer {
             handleValidation(it)
         })
         return view
     }
 
-    private fun handleValidation(state: ValidationResponse) {
+    private fun handleValidation(state: RegisterValidation) {
         when(state) {
-            ValidationResponse.ACCOUNT_ALREADY_EXISTS -> {
+            RegisterValidation.ACCOUNT_ALREADY_EXISTS -> {
                 registration_name_input.error = state.message
             }
-            ValidationResponse.NOT_EQUAL_PASSWORDS -> {
+            RegisterValidation.NOT_EQUAL_PASSWORDS -> {
                 registration_password_input.error = state.message
             }
-            ValidationResponse.NETWORK -> {
+            RegisterValidation.NETWORK -> {
                 registration_error.visibility = View.VISIBLE
-                registration_error.error = state.message
+                registration_error.text = state.message
             }
-            ValidationResponse.DEFAULT -> {
+            RegisterValidation.DEFAULT -> {
                 registration_name_input.error = null
                 registration_password_input.error = null
+                registration_error.visibility = View.INVISIBLE
             }
         }
     }

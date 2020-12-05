@@ -23,7 +23,7 @@ class RegistrationViewModel @Inject constructor(private val repository: LoanRepo
 
     // Todo: make livedata fields private with public getters
     val isValid = MutableLiveData<Boolean>(false)
-    val notValidDescription = MutableLiveData<ValidationResponse>(ValidationResponse.DEFAULT)
+    val validationResult = MutableLiveData<RegisterValidation>(RegisterValidation.DEFAULT)
 
     fun register(name: String, password: String, repeatPassword: String) {
         if(validate(name, password, repeatPassword)) {
@@ -36,10 +36,10 @@ class RegistrationViewModel @Inject constructor(private val repository: LoanRepo
                     },
                     {
                         // Mock error text
-                        if(it.message?.contains("400") == true) {
-                            notValidDescription.value = ValidationResponse.ACCOUNT_ALREADY_EXISTS
+                        if(it.message?.contains("404") == true) {
+                            validationResult.value = RegisterValidation.ACCOUNT_ALREADY_EXISTS
                         } else {
-                            notValidDescription.value = ValidationResponse.NETWORK
+                            validationResult.value = RegisterValidation.NETWORK
                         }
                         Log.d(TAG, it.message?: "")
                     }
@@ -47,7 +47,7 @@ class RegistrationViewModel @Inject constructor(private val repository: LoanRepo
             )
 
         } else {
-            notValidDescription.value = ValidationResponse.NOT_EQUAL_PASSWORDS
+            validationResult.value = RegisterValidation.NOT_EQUAL_PASSWORDS
         }
     }
 
@@ -66,9 +66,9 @@ class RegistrationViewModel @Inject constructor(private val repository: LoanRepo
     }
 }
 
-enum class ValidationResponse(val message: String) {
+enum class RegisterValidation(val message: String) {
     ACCOUNT_ALREADY_EXISTS("Account already exists!"),
     NOT_EQUAL_PASSWORDS("Passwords are not equal!"),
     NETWORK("Network or device problem, try again."),
-    DEFAULT("default state"),
+    DEFAULT("Default"),
 }

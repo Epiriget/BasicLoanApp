@@ -2,6 +2,7 @@ package com.example.basicloanapp.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
+import com.example.basicloanapp.ui.LoginViewModel
 import com.example.basicloanapp.ui.RegistrationViewModel
 import dagger.Binds
 import dagger.MapKey
@@ -40,4 +41,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(RegistrationViewModel::class)
     internal abstract fun registrationViewModel(viewModel: RegistrationViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(LoginViewModel::class)
+    internal abstract fun loginViewModel(viewModel: LoginViewModel): ViewModel
 }

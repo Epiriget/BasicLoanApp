@@ -55,9 +55,22 @@
 
         </com.google.android.material.textfield.TextInputLayout>
 
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/login_error"
+            android:text="@string/registration_error"
+            style="@style/TextAppearance.MaterialComponents.Body1"
+            android:textColor="@color/design_default_color_error"
+            android:layout_width="wrap_content"
+            android:layout_marginTop="12dp"
+            android:layout_marginBottom="12dp"
+            android:layout_height="wrap_content"
+            android:visibility="gone"
+            />
+
+
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/redirect_to_create"
+            android:id="@+id/redirect_to_registration"
             android:text="@string/redirect_to_create_text"
             style="@style/TextAppearance.MaterialComponents.Body1"
             android:layout_width="wrap_content"
