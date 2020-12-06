@@ -5,7 +5,6 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.basicloanapp.data.LoanRepository
 import com.example.basicloanapp.util.Constants
-import io.reactivex.Scheduler
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -27,15 +26,13 @@ class LoginViewModel @Inject constructor(private val repository: LoanRepository,
                 sharedPreferences.edit()
                     .putString(Constants.PREFERENCES_BEARER_KEY, it)
                     .apply()
-                mockRouteToList()
+                validationResult.value = LoginValidation.AUTHORIZED
             }, {
                 validationResult.value = LoginValidation.USER_NOT_FOUND
             })
         )
     }
 
-    fun mockRouteToList(){
-    }
 
     override fun onCleared() {
         disposables.dispose()
@@ -44,7 +41,8 @@ class LoginViewModel @Inject constructor(private val repository: LoanRepository,
 }
 
 enum class LoginValidation(val message: String) {
-    USER_NOT_FOUND("There is no such user!"),
+    USER_NOT_FOUND("There is no such user or password incorrect."),
     NETWORK("Network or device problem, try again."),
-    DEFAULT("Default")
+    DEFAULT("Default"),
+    AUTHORIZED("Authorized")
 }

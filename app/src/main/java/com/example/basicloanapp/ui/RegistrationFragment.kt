@@ -55,10 +55,7 @@ class RegistrationFragment : Fragment() {
         })
 
         view.redirect_to_login.setOnClickListener {
-            navigateToLogin(
-                registration_name_input.editText?.text.toString(),
-                registration_password_input.editText?.text.toString()
-            )
+            navigateToLogin()
         }
         return view
     }
@@ -89,5 +86,9 @@ class RegistrationFragment : Fragment() {
             putString(Constants.PASSWORD_KEY, password)
         }
         navController.navigate(R.id.action_registrationFragment_to_loginFragment, bundle)
+    }
+
+    private fun navigateToLogin() {
+        navController.navigate(R.id.action_registrationFragment_to_loginFragment)
     }
 }

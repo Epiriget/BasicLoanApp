@@ -13,6 +13,7 @@ import androidx.navigation.fragment.NavHostFragment
 import com.example.basicloanapp.LoanApplication
 
 import com.example.basicloanapp.R
+import com.example.basicloanapp.util.Constants
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.android.synthetic.main.fragment_registration.*
@@ -51,6 +52,7 @@ class LoginFragment : Fragment() {
         model.validationResult.observe(viewLifecycleOwner, Observer {
             handleValidation(it)
         })
+
         return view
     }
 
@@ -69,6 +71,9 @@ class LoginFragment : Fragment() {
                 login_name_input.error = null
                 login_error.text = state.message
             }
+            LoginValidation.AUTHORIZED -> {
+                navigateToLoanList()
+            }
         }
     }
 
@@ -76,4 +81,7 @@ class LoginFragment : Fragment() {
         navController.navigate(R.id.action_loginFragment_to_registrationFragment)
     }
 
+    private fun navigateToLoanList() {
+        navController.navigate(R.id.action_loginFragment_to_loanListFragment)
+    }
 }

@@ -2,6 +2,7 @@ package com.example.basicloanapp.di
 
 import android.app.Application
 import android.content.Context
+import com.example.basicloanapp.ui.LoanListFragment
 import com.example.basicloanapp.ui.LoginFragment
 import com.example.basicloanapp.ui.MainActivity
 import com.example.basicloanapp.ui.RegistrationFragment
@@ -16,6 +17,7 @@ interface GraphComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(registrationFragment: RegistrationFragment)
     fun inject(loginFragment: LoginFragment)
+    fun inject(loginFragment: LoanListFragment)
 
     @Component.Builder
     interface Builder {

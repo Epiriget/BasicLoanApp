@@ -14,6 +14,7 @@
         tools:layout="@layout/fragment_registration" >
         <action
             android:id="@+id/action_registrationFragment_to_loginFragment"
+            app:launchSingleTop="true"
             app:destination="@id/loginFragment" />
     </fragment>
 
@@ -25,6 +26,17 @@
         tools:layout="@layout/fragment_login" >
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
+            app:launchSingleTop="true"
             app:destination="@id/registrationFragment" />
+        <action
+            android:id="@+id/action_loginFragment_to_loanListFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/loanListFragment" />
     </fragment>
+
+    <fragment
+        android:id="@+id/loanListFragment"
+        android:name="com.example.basicloanapp.ui.LoanListFragment"
+        android:label="fragment_loan_list"
+        tools:layout="@layout/fragment_loan_list" />
 </navigation>
