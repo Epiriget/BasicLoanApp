@@ -5,6 +5,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.basicloanapp.ui.LoanListViewModel
 import com.example.basicloanapp.ui.LoginViewModel
 import com.example.basicloanapp.ui.RegistrationViewModel
+import com.example.basicloanapp.ui.SplashViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -52,4 +53,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(LoanListViewModel::class)
     internal abstract fun loanListViewModel(viewModel: LoanListViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(SplashViewModel::class)
+    internal abstract fun splashViewModel(viewModel: SplashViewModel): ViewModel
 }

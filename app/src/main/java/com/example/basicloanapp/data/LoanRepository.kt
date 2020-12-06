@@ -21,7 +21,11 @@ class LoanRepository @Inject constructor (private val service: LoanService,
     }
 
     fun getLoans(): Single<List<LoanBodyResponse>> {
-        val token = sharedPreferences.getString(Constants.PREFERENCES_BEARER_KEY, "")!!
+        val token = getTokenFromSharedPrefs()
         return service.getAllLoans(token)
+    }
+
+    fun getTokenFromSharedPrefs(): String {
+        return sharedPreferences.getString(Constants.PREFERENCES_BEARER_KEY, "")!!
     }
 }

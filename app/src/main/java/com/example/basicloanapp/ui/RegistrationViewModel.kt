@@ -11,14 +11,12 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class RegistrationViewModel @Inject constructor(private val repository: LoanRepository,
-                private val sharedPreferences: SharedPreferences): ViewModel() {
+class RegistrationViewModel @Inject constructor(private val repository: LoanRepository): ViewModel() {
 
     companion object {
         private const val TAG = "RegistrationVM"
     }
 
-    private val bearerKey = sharedPreferences.getString(Constants.PREFERENCES_BEARER_KEY, "")
     private val disposables = CompositeDisposable()
 
     // Todo: make livedata fields private with public getters

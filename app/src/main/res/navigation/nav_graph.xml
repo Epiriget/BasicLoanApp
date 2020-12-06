@@ -5,7 +5,7 @@
 
     xmlns:tools="http://schemas.android.com/tools"
     android:id="@+id/nav_graph"
-    app:startDestination="@id/registrationFragment">
+    app:startDestination="@id/splashFragment">
 
     <fragment
         android:id="@+id/registrationFragment"
@@ -39,4 +39,19 @@
         android:name="com.example.basicloanapp.ui.LoanListFragment"
         android:label="fragment_loan_list"
         tools:layout="@layout/fragment_loan_list" />
+
+    <fragment
+        android:id="@+id/splashFragment"
+        android:name="com.example.basicloanapp.ui.SplashFragment"
+        android:label="fragment_splash"
+        tools:layout="@layout/fragment_splash" >
+        <action
+            android:id="@+id/action_splashFragment_to_loanListFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/loanListFragment" />
+        <action
+            android:id="@+id/action_splashFragment_to_registrationFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/registrationFragment" />
+    </fragment>
 </navigation>
