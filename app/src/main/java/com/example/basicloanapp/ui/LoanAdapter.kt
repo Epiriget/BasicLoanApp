@@ -33,10 +33,13 @@ class LoanAdapter(private val onClick: (LoanBodyResponse) ->  Unit):
     }
 }
 
-class LoanViewHolder(view: View, val onClick: (LoanBodyResponse) -> Unit): RecyclerView.ViewHolder(view) {
+class LoanViewHolder(private val view: View, val onClick: (LoanBodyResponse) -> Unit): RecyclerView.ViewHolder(view) {
     private var currLoan: LoanBodyResponse? = null
     private val amount = view.findViewById<TextView>(R.id.item_amount)
     private val date = view.findViewById<TextView>(R.id.item_date)
+    private val percent = view.findViewById<TextView>(R.id.item_percent)
+    private val period = view.findViewById<TextView>(R.id.item_period)
+    private val state = view.findViewById<TextView>(R.id.item_state)
 
     init {
         view.setOnClickListener {
@@ -46,10 +49,21 @@ class LoanViewHolder(view: View, val onClick: (LoanBodyResponse) -> Unit): Recyc
         }
     }
 
-    // Todo: Replace mock representation
     fun bind(loan: LoanBodyResponse) {
-        amount.text = loan.amount.toString()
-        date.text = loan.date
+        amount.text = view.resources.getString(R.string.item_amount, loan.amount)
+        date.text = view.resources.getString(R.string.item_date, loan.date)
+        percent.text = view.resources.getString(R.string.item_percent, loan.percent)
+        period.text = view.resources.getString(R.string.item_period, loan.period)
+
+        when(loan.state) {
+            view.resources.getString(R.string.item_approved) -> {
+                state.setTextColor(view.resources.getColor(R.color.itemApproved))
+            }
+            view.resources.getString(R.string.item_registered) -> {
+                state.setTextColor(view.resources.getColor(R.color.itemRegistered))
+            }
+        }
+        state.text = loan.state
     }
 
     companion object {

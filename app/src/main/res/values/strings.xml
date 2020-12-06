@@ -12,4 +12,12 @@
     <string name="redirect_to_create_text">Create new profile</string>
     <string name="login_button">Login</string>
     <string name="registration_error">Some error occurred</string>
+
+    <string name="item_approved">APPROVED</string>
+    <string name="item_registered">REGISTERED</string>
+
+    <string name="item_amount">Amount: %1$d</string>
+    <string name="item_percent">at percent: %1$.2f</string>
+    <string name="item_date">Borrowed at: %1$s</string>
+    <string name="item_period">for: %1$d days</string>
 </resources>
