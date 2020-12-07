@@ -31,5 +31,6 @@
     <string name="conditions_period">Period: %1$d days</string>
     <string name="conditions_amount">Max Amount: %1$d</string>
     <string name="conditions_percent">Loan rate: %1$.2f%%</string>
+    <string name="menu_refresh">Refresh</string>
 
 </resources>

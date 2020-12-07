@@ -1,5 +1,6 @@
 package com.example.basicloanapp.service
 
+import io.reactivex.Flowable
 import io.reactivex.Single
 import retrofit2.http.*
 

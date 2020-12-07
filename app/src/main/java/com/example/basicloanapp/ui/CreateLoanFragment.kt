@@ -10,7 +10,6 @@ import androidx.lifecycle.ViewModelProvider
 
 import com.example.basicloanapp.R
 import com.example.basicloanapp.service.LoanConditions
-import com.example.basicloanapp.service.LoanCreateRequest
 import kotlinx.android.synthetic.main.fragment_create_loan.view.*
 
 class CreateLoanFragment : BaseFragment() {
@@ -30,7 +29,7 @@ class CreateLoanFragment : BaseFragment() {
         _view = inflater.inflate(R.layout.fragment_create_loan, container, false)
         model.conditions.observe(viewLifecycleOwner, Observer {
             conditions = it
-            setConditions(it)
+            setConditionFields(it)
         })
 
         _view.create_button.setOnClickListener {
@@ -50,7 +49,7 @@ class CreateLoanFragment : BaseFragment() {
         return _view
     }
 
-    private fun setConditions(conditions: LoanConditions) {
+    private fun setConditionFields(conditions: LoanConditions) {
         _view.conditions_amount.text = _view.resources.getString(R.string.conditions_amount, conditions.maxAmount)
         _view.conditions_percent.text = _view.resources.getString(R.string.conditions_percent, conditions.percent)
         _view.conditions_period.text = _view.resources.getString(R.string.conditions_period, conditions.period)

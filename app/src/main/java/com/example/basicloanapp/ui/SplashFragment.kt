@@ -28,11 +28,11 @@ class SplashFragment : BaseFragment() {
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
 
-    fun navigateToRegistration() {
+    private fun navigateToRegistration() {
         navController.navigate(R.id.action_splashFragment_to_registrationFragment)
     }
 
-    fun navigateToList() {
+    private fun navigateToList() {
         navController.navigate(R.id.action_splashFragment_to_loanListFragment)
     }
 

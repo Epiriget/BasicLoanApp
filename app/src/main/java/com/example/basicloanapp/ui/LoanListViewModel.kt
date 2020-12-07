@@ -19,10 +19,6 @@ class LoanListViewModel @Inject constructor(
     val loans = MutableLiveData<List<LoanBodyResponse>>()
     private val disposables = CompositeDisposable()
 
-    init {
-        getLoans()
-    }
-
     fun getLoans() {
         disposables.add(repository.getLoans()
             .subscribeOn(Schedulers.io())
@@ -33,6 +29,10 @@ class LoanListViewModel @Inject constructor(
                     Log.d("LoanList", "Error in getLoans()")
                 })
         )
+    }
+
+    fun logOut() {
+        repository.clearTokenFromSharedPrefs()
     }
 
     override fun onCleared() {

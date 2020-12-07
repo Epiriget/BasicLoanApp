@@ -2,10 +2,8 @@ package com.example.basicloanapp.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.view.*
 import androidx.fragment.app.Fragment
-import android.view.LayoutInflater
-import android.view.View
-import android.view.ViewGroup
 import android.widget.Toast
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
@@ -14,6 +12,7 @@ import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
+import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.basicloanapp.LoanApplication
 
 import com.example.basicloanapp.R
@@ -22,9 +21,10 @@ import kotlinx.android.synthetic.main.fragment_loan_list.*
 import kotlinx.android.synthetic.main.fragment_loan_list.view.*
 import javax.inject.Inject
 
-class LoanListFragment : BaseFragment() {
+class LoanListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var model: LoanListViewModel
     private lateinit var loanList: RecyclerView
+    private lateinit var refreshLayout: SwipeRefreshLayout
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -37,13 +37,21 @@ class LoanListFragment : BaseFragment() {
         savedInstanceState: Bundle?
     ): View? {
         val view = inflater.inflate(R.layout.fragment_loan_list, container, false)
+        setHasOptionsMenu(true)
+        refreshLayout = view.refresh_layout.also {
+            it.setOnRefreshListener(this)
+            it.isRefreshing = true
+        }
+        model.getLoans()
+
+
         loanList = view.findViewById(R.id.list)
         val adapter = LoanAdapter { loan -> adapterOnClick(loan) }
 
         initRecyclerView(adapter)
-
         model.loans.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it as MutableList<LoanBodyResponse>)
+            refreshLayout.isRefreshing = false
         })
 
         view.fab.setOnClickListener { navigateToCreateLoan() }
@@ -69,4 +77,30 @@ class LoanListFragment : BaseFragment() {
         navController.navigate(R.id.action_loanListFragment_to_createLoanFragment)
     }
 
+    private fun logOut() {
+        model.logOut()
+        navController.navigate(R.id.action_loanListFragment_to_loginFragment)
+    }
+
+    override fun onRefresh() {
+        model.getLoans()
+    }
+
+    override fun onCreateOptionsMenu(menu: Menu, inflater: MenuInflater) {
+        inflater.inflate(R.menu.menu_list, menu)
+        super.onCreateOptionsMenu(menu, inflater)
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            R.id.menu_refresh -> {
+                refreshLayout.isRefreshing = true
+                model.getLoans()
+            }
+            R.id.menu_logout -> {
+                logOut()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
 }

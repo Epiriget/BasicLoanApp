@@ -4,6 +4,7 @@ import android.content.SharedPreferences
 import android.provider.SyncStateContract
 import com.example.basicloanapp.service.*
 import com.example.basicloanapp.util.Constants
+import io.reactivex.Flowable
 import io.reactivex.Single
 import javax.inject.Inject
 
@@ -39,5 +40,11 @@ class LoanRepository @Inject constructor (private val service: LoanService,
     fun createLoan(loan: LoanCreateRequest): Single<LoanBodyResponse> {
         val token = getTokenFromSharedPrefs()
         return service.createLoan(token, loan)
+    }
+
+    fun clearTokenFromSharedPrefs() {
+        sharedPreferences.edit()
+            .putString(Constants.PREFERENCES_BEARER_KEY, "")
+            .apply()
     }
 }
