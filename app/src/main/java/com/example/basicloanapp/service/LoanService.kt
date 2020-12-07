@@ -16,6 +16,7 @@ interface LoanService {
 
     @POST("loans")
     fun createLoan(
+        @Header("Authorization") bearerToken: String,
         @Body request: LoanCreateRequest
     ): Single <LoanBodyResponse>
 
@@ -31,7 +32,9 @@ interface LoanService {
         ): Single<List<LoanBodyResponse>>
 
     @GET("loans/conditions")
-    fun getLoanConditions(): Single<LoanConditions>
+    fun getLoanConditions(
+        @Header("Authorization") bearerToken: String
+    ): Single<LoanConditions>
 
 
 }

@@ -3,7 +3,6 @@ package com.example.basicloanapp.ui
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
-import android.view.ViewParent
 import android.widget.TextView
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
@@ -61,6 +60,9 @@ class LoanViewHolder(private val view: View, val onClick: (LoanBodyResponse) -> 
             }
             view.resources.getString(R.string.item_registered) -> {
                 state.setTextColor(view.resources.getColor(R.color.itemRegistered))
+            }
+            view.resources.getString(R.string.item_rejected) -> {
+                state.setTextColor(view.resources.getColor(R.color.itemRejected))
             }
         }
         state.text = loan.state

@@ -38,7 +38,11 @@
         android:id="@+id/loanListFragment"
         android:name="com.example.basicloanapp.ui.LoanListFragment"
         android:label="fragment_loan_list"
-        tools:layout="@layout/fragment_loan_list" />
+        tools:layout="@layout/fragment_loan_list" >
+        <action
+            android:id="@+id/action_loanListFragment_to_createLoanFragment"
+            app:destination="@id/createLoanFragment" />
+    </fragment>
 
     <fragment
         android:id="@+id/splashFragment"
@@ -53,5 +57,16 @@
             android:id="@+id/action_splashFragment_to_registrationFragment"
             app:popUpToInclusive="true"
             app:destination="@id/registrationFragment" />
+    </fragment>
+
+    <fragment
+        android:id="@+id/createLoanFragment"
+        android:name="com.example.basicloanapp.ui.CreateLoanFragment"
+        android:label="fragment_create_loan"
+        tools:layout="@layout/fragment_create_loan" >
+        <action
+            android:id="@+id/action_createLoanFragment_to_loanListFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/loanListFragment" />
     </fragment>
 </navigation>

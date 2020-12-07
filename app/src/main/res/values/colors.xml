@@ -6,5 +6,5 @@
 
     <color name="itemApproved">#4CBB17</color>
     <color name="itemRegistered">#FFD300</color>
-    <color name="itemDeclined">#FF0800</color>
+    <color name="itemRejected">#FF0800</color>
 </resources>

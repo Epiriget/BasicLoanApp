@@ -2,10 +2,7 @@ package com.example.basicloanapp.di
 
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
-import com.example.basicloanapp.ui.LoanListViewModel
-import com.example.basicloanapp.ui.LoginViewModel
-import com.example.basicloanapp.ui.RegistrationViewModel
-import com.example.basicloanapp.ui.SplashViewModel
+import com.example.basicloanapp.ui.*
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
@@ -58,4 +55,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(SplashViewModel::class)
     internal abstract fun splashViewModel(viewModel: SplashViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(CreateLoanViewModel::class)
+    internal abstract fun createLoanViewModel(viewModel: CreateLoanViewModel): ViewModel
 }

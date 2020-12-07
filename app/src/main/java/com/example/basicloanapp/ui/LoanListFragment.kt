@@ -19,22 +19,16 @@ import com.example.basicloanapp.LoanApplication
 import com.example.basicloanapp.R
 import com.example.basicloanapp.service.LoanBodyResponse
 import kotlinx.android.synthetic.main.fragment_loan_list.*
+import kotlinx.android.synthetic.main.fragment_loan_list.view.*
 import javax.inject.Inject
 
-class LoanListFragment : Fragment() {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+class LoanListFragment : BaseFragment() {
     private lateinit var model: LoanListViewModel
-    private lateinit var navController: NavController
     private lateinit var loanList: RecyclerView
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as LoanApplication).repositoryComponent.inject(this)
         model = ViewModelProvider(this, viewModelFactory)[LoanListViewModel::class.java]
-        val navHostFragment = requireActivity().supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
     }
 
 
@@ -51,6 +45,8 @@ class LoanListFragment : Fragment() {
         model.loans.observe(viewLifecycleOwner, Observer {
             adapter.submitList(it as MutableList<LoanBodyResponse>)
         })
+
+        view.fab.setOnClickListener { navigateToCreateLoan() }
         return view
     }
 
@@ -67,6 +63,10 @@ class LoanListFragment : Fragment() {
         loanList.addItemDecoration(decoration)
 
         loanList.adapter = adapter
+    }
+
+    private fun navigateToCreateLoan() {
+        navController.navigate(R.id.action_loanListFragment_to_createLoanFragment)
     }
 
 }

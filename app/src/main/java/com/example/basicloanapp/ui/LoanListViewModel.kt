@@ -13,8 +13,7 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class LoanListViewModel @Inject constructor(
-    private val repository: LoanRepository,
-    private val sharedPreferences: SharedPreferences
+    private val repository: LoanRepository
 ) : ViewModel() {
     // Todo: make private setter
     val loans = MutableLiveData<List<LoanBodyResponse>>()
@@ -27,10 +26,9 @@ class LoanListViewModel @Inject constructor(
     fun getLoans() {
         disposables.add(repository.getLoans()
             .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
             .subscribe(
                 {
-                    loans.value = it
+                    loans.postValue(it)
                 }, {
                     Log.d("LoanList", "Error in getLoans()")
                 })
