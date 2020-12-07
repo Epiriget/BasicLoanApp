@@ -11,7 +11,7 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class CreateLoanViewModel @Inject constructor(private val repository: LoanRepository):
+class CreateLoanViewModel @Inject constructor(private val repository: LoanRepository) :
     ViewModel() {
     private val disposables = CompositeDisposable()
 
@@ -19,9 +19,9 @@ class CreateLoanViewModel @Inject constructor(private val repository: LoanReposi
     val conditions: LiveData<LoanConditions>
         get() = _conditions
 
-    private val _errorText = MutableLiveData<String>()
-    val errorText: LiveData<String>
-        get() = _errorText
+    private val _validationResult = MutableLiveData<CreateValidation>()
+    val validationResult: LiveData<CreateValidation>
+        get() = _validationResult
 
     init {
         getConditions()
@@ -41,19 +41,50 @@ class CreateLoanViewModel @Inject constructor(private val repository: LoanReposi
         )
     }
 
-    fun createLoan(loan: LoanCreateRequest) {
-        disposables.add(repository.createLoan(loan)
-            .subscribeOn(Schedulers.io())
-            .subscribe({
+    fun createLoan(
+        amount: String, name: String, surname: String,
+        percent: Double, period: Int, phone: String
+    ) {
+        if (validateInput(amount, name, surname, phone)) {
+            val loan = LoanCreateRequest(amount.toInt(), name, surname, percent, period, phone)
+            disposables.add(
+                repository.createLoan(loan)
+                    .subscribeOn(Schedulers.io())
+                    .subscribe({
 
-            }, {
-                _errorText.postValue(it.message)
-            })
-        )
+                    }, {
+                        _validationResult.postValue(CreateValidation.NETWORK)
+                    })
+            )
+        }
+    }
+
+    private fun validateInput(amount: String, name: String, surname: String, phone: String): Boolean {
+        val amountInt: Int? = amount.toIntOrNull()
+        _validationResult.value = when {
+            amountInt == null -> CreateValidation.AMOUNT_TYPE_ERROR
+            amountInt > conditions.value!!.maxAmount -> CreateValidation.AMOUNT_SIZE_ERROR
+            name.isEmpty() -> CreateValidation.NAME_EMPTY
+            surname.isEmpty() -> CreateValidation.SURNAME_EMPTY
+            phone.isEmpty() -> CreateValidation.PHONE_EMPTY
+            else -> CreateValidation.GOOD
+        }
+        return _validationResult.value == CreateValidation.GOOD
     }
 
     override fun onCleared() {
         super.onCleared()
         disposables.dispose()
     }
+
+}
+
+enum class CreateValidation(val message: String) {
+    NETWORK("Error on server side, try again."),
+    AMOUNT_TYPE_ERROR("Amount is empty!"),
+    AMOUNT_SIZE_ERROR("Amount is more than let in conditions!"),
+    NAME_EMPTY("Name is empty!"),
+    SURNAME_EMPTY("Surname is empty!"),
+    PHONE_EMPTY("Phone number is empty!"),
+    GOOD("Good")
 }
