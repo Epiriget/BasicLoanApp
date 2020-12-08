@@ -3,6 +3,7 @@ package com.example.basicloanapp.ui
 import android.content.SharedPreferences
 import android.util.Log
 import androidx.compose.ui.viewinterop.AndroidView
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.basicloanapp.data.LoanRepository
@@ -15,7 +16,11 @@ import javax.inject.Inject
 class LoanListViewModel @Inject constructor(
     private val repository: LoanRepository
 ) : ViewModel() {
-    val loans = MutableLiveData<List<LoanBodyResponse>>()
+
+    private val _loans = MutableLiveData<List<LoanBodyResponse>>()
+    val loans: LiveData<List<LoanBodyResponse>>
+        get() = _loans
+
     private val disposables = CompositeDisposable()
 
     fun getLoans() {
@@ -23,7 +28,7 @@ class LoanListViewModel @Inject constructor(
             .subscribeOn(Schedulers.io())
             .subscribe(
                 {
-                    loans.postValue(it)
+                    _loans.postValue(it)
                 }, {
                     Log.d("LoanList", "Error in getLoans()")
                 })

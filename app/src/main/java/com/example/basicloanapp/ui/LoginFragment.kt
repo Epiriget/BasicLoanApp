@@ -24,6 +24,7 @@ class LoginFragment : Fragment() {
     lateinit var viewModelFactory: ViewModelProvider.Factory
     private lateinit var model: LoginViewModel
     private lateinit var navController: NavController
+    private lateinit var _view: View
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -38,14 +39,14 @@ class LoginFragment : Fragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
-        val view = inflater.inflate(R.layout.fragment_login, container, false)
+        _view = inflater.inflate(R.layout.fragment_login, container, false)
 
-        view.button_login.setOnClickListener { model.login(
+        _view.button_login.setOnClickListener { model.login(
             login_name_input.editText?.text.toString(),
             login_password_input.editText?.text.toString())
         }
 
-        view.redirect_to_registration.setOnClickListener {
+        _view.redirect_to_registration.setOnClickListener {
             navigateToRegistration()
         }
 
@@ -53,12 +54,13 @@ class LoginFragment : Fragment() {
             handleValidation(it)
         })
 
-        return view
+        return _view
     }
 
 
 
     private fun handleValidation(state: LoginValidation?) {
+        clearErrorFields()
         when(state) {
             LoginValidation.USER_NOT_FOUND -> {
                 login_name_input.error = state.message
@@ -67,14 +69,22 @@ class LoginFragment : Fragment() {
                 login_error.visibility = View.VISIBLE
                 login_error.text = state.message
             }
-            LoginValidation.DEFAULT -> {
-                login_name_input.error = null
-                login_error.text = state.message
+            LoginValidation.NAME_EMPTY -> {
+                login_name_input.error = state.message
             }
-            LoginValidation.AUTHORIZED -> {
+            LoginValidation.PASSWORD_EMPTY -> {
+                login_password_input.error = state.message
+            }
+            LoginValidation.GOOD -> {
                 navigateToLoanList()
             }
         }
+    }
+
+    private fun clearErrorFields() {
+        _view.login_name_input.error = null
+        login_password_input.error = null
+        login_error.visibility = View.GONE
     }
 
     private fun navigateToRegistration() {

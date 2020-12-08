@@ -1,13 +1,9 @@
 package com.example.basicloanapp.ui
 
-import android.content.SharedPreferences
-import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.basicloanapp.data.LoanRepository
-import com.example.basicloanapp.util.Constants
-import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
@@ -21,16 +17,16 @@ class RegistrationViewModel @Inject constructor(private val repository: LoanRepo
         get() = _validationResult
 
     fun register(name: String, password: String, repeatPassword: String) {
-        if(validate(name, password, repeatPassword)) {
+        val preValidation = validateInput(name, password, repeatPassword)
+        if(preValidation == RegisterValidation.GOOD) {
             disposables.add(repository.register(name, password)
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                     {
                         _validationResult.postValue(RegisterValidation.GOOD)
-
                     },
                     {
-                        if(it.message?.contains("404") == true) {
+                        if(it.message?.contains("400") == true) {
                             _validationResult.postValue(RegisterValidation.ACCOUNT_ALREADY_EXISTS)
                         } else {
                             _validationResult.postValue(RegisterValidation.NETWORK)
@@ -39,12 +35,18 @@ class RegistrationViewModel @Inject constructor(private val repository: LoanRepo
                 )
             )
         } else {
-            _validationResult.value = RegisterValidation.NOT_EQUAL_PASSWORDS
+            _validationResult.value = preValidation
         }
     }
 
-    private fun validate(name: String, password: String, repeatPassword: String): Boolean {
-        return password == repeatPassword
+    private fun validateInput(name: String, password: String, repeatPassword: String): RegisterValidation {
+        return when {
+            name.isEmpty() -> RegisterValidation.NAME_EMPTY
+            password.isEmpty() -> RegisterValidation.PASSWORD_EMPTY
+            repeatPassword.isEmpty() -> RegisterValidation.REPEAT_PASSWORD_EMPTY
+            password != repeatPassword -> RegisterValidation.NOT_EQUAL_PASSWORDS
+            else -> RegisterValidation.GOOD
+        }
     }
 
     override fun onCleared() {
@@ -57,5 +59,8 @@ enum class RegisterValidation(val message: String) {
     ACCOUNT_ALREADY_EXISTS("Account already exists!"),
     NOT_EQUAL_PASSWORDS("Passwords are not equal!"),
     NETWORK("Network or device problem, try again."),
+    NAME_EMPTY("Name is empty or consists of whitespaces!"),
+    PASSWORD_EMPTY("Password is empty or consists of whitespaces!"),
+    REPEAT_PASSWORD_EMPTY("Password is empty or consists of whitespaces!"),
     GOOD("Good")
 }

@@ -46,9 +46,9 @@ class RegistrationFragment : Fragment() {
         val view = inflater.inflate(R.layout.fragment_registration, container, false)
 
         view.button_register.setOnClickListener {
-            model.register(registration_name_input.editText?.text.toString(),
-                        registration_password_input.editText?.text.toString(),
-                        registration_repeat_password_input.editText?.text.toString())
+            model.register(registration_name_input.editText?.text.toString().trim(),
+                        registration_password_input.editText?.text.toString().trim(),
+                        registration_repeat_password_input.editText?.text.toString().trim())
         }
 
         model.validationResult.observe(viewLifecycleOwner, Observer {
@@ -60,12 +60,13 @@ class RegistrationFragment : Fragment() {
         }
         return view
     }
-
+    // Todo: Problem with localization
     private fun handleValidation(state: RegisterValidation) {
         clearErrors()
         when(state) {
             RegisterValidation.ACCOUNT_ALREADY_EXISTS -> {
-                registration_name_input.error = state.message
+                registration_error.visibility = View.VISIBLE
+                registration_error.text = state.message
             }
             RegisterValidation.NOT_EQUAL_PASSWORDS -> {
                 registration_password_input.error = state.message
@@ -73,6 +74,15 @@ class RegistrationFragment : Fragment() {
             RegisterValidation.NETWORK -> {
                 registration_error.visibility = View.VISIBLE
                 registration_error.text = state.message
+            }
+            RegisterValidation.NAME_EMPTY -> {
+                registration_name_input.error = state.message
+            }
+            RegisterValidation.PASSWORD_EMPTY -> {
+                registration_password_input.error = state.message
+            }
+            RegisterValidation.REPEAT_PASSWORD_EMPTY -> {
+                registration_repeat_password_input.error = state.message
             }
             RegisterValidation.GOOD -> {
                 navigateToList()
@@ -83,6 +93,7 @@ class RegistrationFragment : Fragment() {
     private fun clearErrors() {
         registration_name_input.error = null
         registration_password_input.error = null
+        registration_repeat_password_input.error = null
         registration_error.visibility = View.GONE
     }
 
