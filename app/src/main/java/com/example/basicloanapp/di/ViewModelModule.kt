@@ -60,4 +60,9 @@ abstract class ViewModelModule {
     @IntoMap
     @ViewModelKey(CreateLoanViewModel::class)
     internal abstract fun createLoanViewModel(viewModel: CreateLoanViewModel): ViewModel
+
+    @Binds
+    @IntoMap
+    @ViewModelKey(DetailsViewModel::class)
+    internal abstract fun detailsViewModel(viewModel: DetailsViewModel): ViewModel
 }

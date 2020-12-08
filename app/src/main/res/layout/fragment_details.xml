@@ -1,0 +1,101 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:orientation="vertical"
+    tools:context=".ui.DetailsFragment">
+
+    <com.google.android.material.textview.MaterialTextView
+        style="@style/TextAppearance.MaterialComponents.Headline4"
+        android:layout_marginStart="12dp"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/personal_details_label" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/details_name"
+        style="@style/InformationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/details_name"
+        tools:text="Name: SomeName" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/details_surname"
+        style="@style/InformationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/details_surname"
+        tools:text="Surname: SomeSurname" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/details_phone"
+        style="@style/InformationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/details_phone"
+        tools:text="Phone Number: 8923535346" />
+
+    <View
+        android:layout_width="match_parent"
+        android:layout_height="1dp"
+        style="@style/SeparatorLine"
+        />
+
+
+    <com.google.android.material.textview.MaterialTextView
+        android:layout_marginStart="12dp"
+        style="@style/TextAppearance.MaterialComponents.Headline4"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/loan_details_label" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/details_amount"
+        style="@style/InformationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/details_amount"
+        tools:text="Amount: 2000" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/details_percent"
+        style="@style/InformationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/details_percent"
+        tools:text="Loan Rate: 10.5%" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/details_date"
+        style="@style/InformationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/details_date"
+        tools:text="Borrowed at: 21.12.2020 13:21" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/details_period"
+        style="@style/InformationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/details_period"
+        tools:text="Loan repayment date: 21.01.2021 13.21" />
+
+    <com.google.android.material.textview.MaterialTextView
+        android:id="@+id/details_state"
+        style="@style/InformationText"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:text="@string/details_state"
+        tools:text="Current state: APPROVED" />
+
+    <com.google.android.material.button.MaterialButton
+        android:id="@+id/details_back"
+        android:layout_width="wrap_content"
+        style="@style/TransitionButton"
+        android:layout_height="wrap_content"
+        android:text="@string/details_back_button" />
+
+</LinearLayout>

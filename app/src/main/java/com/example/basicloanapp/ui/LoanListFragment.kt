@@ -17,6 +17,7 @@ import com.example.basicloanapp.LoanApplication
 
 import com.example.basicloanapp.R
 import com.example.basicloanapp.service.LoanBodyResponse
+import com.example.basicloanapp.util.Constants
 import kotlinx.android.synthetic.main.fragment_loan_list.*
 import kotlinx.android.synthetic.main.fragment_loan_list.view.*
 import javax.inject.Inject
@@ -46,7 +47,7 @@ class LoanListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
 
         loanList = view.findViewById(R.id.list)
-        val adapter = LoanAdapter { loan -> adapterOnClick(loan) }
+        val adapter = LoanAdapter { id -> adapterOnClick(id) }
 
         initRecyclerView(adapter)
         model.loans.observe(viewLifecycleOwner, Observer {
@@ -58,9 +59,11 @@ class LoanListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         return view
     }
 
-    private fun adapterOnClick(loan: LoanBodyResponse) {
-        //Todo:"Replace with details of loan"
-        Toast.makeText(requireActivity(), "List Item clicked!", Toast.LENGTH_SHORT).show()
+    private fun adapterOnClick(id: Int) {
+        val bundle = Bundle().apply {
+            putInt(Constants.DETAILS_ID_KEY, id)
+        }
+        navController.navigate(R.id.action_loanListFragment_to_detailsFragment, bundle)
     }
 
     private fun initRecyclerView(adapter: LoanAdapter) {

@@ -10,7 +10,7 @@ import androidx.recyclerview.widget.RecyclerView
 import com.example.basicloanapp.R
 import com.example.basicloanapp.service.LoanBodyResponse
 
-class LoanAdapter(private val onClick: (LoanBodyResponse) ->  Unit):
+class LoanAdapter(private val onClick: (Int) ->  Unit):
     ListAdapter<LoanBodyResponse, LoanViewHolder>(LoanDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LoanViewHolder {
@@ -32,7 +32,7 @@ class LoanAdapter(private val onClick: (LoanBodyResponse) ->  Unit):
     }
 }
 
-class LoanViewHolder(private val view: View, val onClick: (LoanBodyResponse) -> Unit): RecyclerView.ViewHolder(view) {
+class LoanViewHolder(private val view: View, val onClick: (Int) -> Unit): RecyclerView.ViewHolder(view) {
     private var currLoan: LoanBodyResponse? = null
     private val amount = view.findViewById<TextView>(R.id.item_amount)
     private val date = view.findViewById<TextView>(R.id.item_date)
@@ -43,12 +43,13 @@ class LoanViewHolder(private val view: View, val onClick: (LoanBodyResponse) -> 
     init {
         view.setOnClickListener {
             currLoan?.let {
-                onClick(it)
+                onClick(it.id)
             }
         }
     }
 
     fun bind(loan: LoanBodyResponse) {
+        currLoan = loan
         amount.text = view.resources.getString(R.string.item_amount, loan.amount)
         date.text = view.resources.getString(R.string.item_date, loan.date)
         percent.text = view.resources.getString(R.string.item_percent, loan.percent)
@@ -69,7 +70,7 @@ class LoanViewHolder(private val view: View, val onClick: (LoanBodyResponse) -> 
     }
 
     companion object {
-        fun create(parent: ViewGroup, onClick: (LoanBodyResponse) -> Unit): LoanViewHolder {
+        fun create(parent: ViewGroup, onClick: (Int) -> Unit): LoanViewHolder {
             val view = LayoutInflater.from(parent.context)
                 .inflate(R.layout.loan_view_item, parent, false)
             return LoanViewHolder(view, onClick)

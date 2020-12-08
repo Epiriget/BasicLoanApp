@@ -23,6 +23,19 @@ class LoanRepository @Inject constructor (private val service: LoanService,
         return service.getAllLoans(token)
     }
 
+    fun getLoanConditions(): Single<LoanConditions> {
+        return service.getLoanConditions(getTokenFromSharedPrefs())
+    }
+
+    fun createLoan(loan: LoanCreateRequest): Single<LoanBodyResponse> {
+        val token = getTokenFromSharedPrefs()
+        return service.createLoan(token, loan)
+    }
+
+    fun getLoan(id: Int): Single<LoanBodyResponse> {
+        return service.getLoanById(getTokenFromSharedPrefs(), id)
+    }
+
     fun getTokenFromSharedPrefs(): String {
         return sharedPreferences.getString(Constants.PREFERENCES_BEARER_KEY, "")!!
     }
@@ -31,15 +44,6 @@ class LoanRepository @Inject constructor (private val service: LoanService,
         sharedPreferences.edit()
             .putString(Constants.PREFERENCES_BEARER_KEY, token)
             .apply()
-    }
-
-    fun getLoanConditions(): Single<LoanConditions> {
-        return service.getLoanConditions(getTokenFromSharedPrefs())
-    }
-
-    fun createLoan(loan: LoanCreateRequest): Single<LoanBodyResponse> {
-        val token = getTokenFromSharedPrefs()
-        return service.createLoan(token, loan)
     }
 
     fun clearTokenFromSharedPrefs() {
