@@ -10,26 +10,28 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class LoginViewModel @Inject constructor(private val repository: LoanRepository,
-                                                private val sharedPreferences: SharedPreferences
-): ViewModel() {
+class LoginViewModel @Inject constructor(
+    private val repository: LoanRepository
+
+) : ViewModel() {
     private val disposables = CompositeDisposable()
 
     val validationResult = MutableLiveData<LoginValidation>(LoginValidation.DEFAULT)
 
 
     fun login(name: String, password: String) {
-        disposables.add(repository.login(name, password)
-            .subscribeOn(Schedulers.io())
-            .observeOn(AndroidSchedulers.mainThread())
-            .subscribe({
-                sharedPreferences.edit()
-                    .putString(Constants.PREFERENCES_BEARER_KEY, it)
-                    .apply()
-                validationResult.value = LoginValidation.AUTHORIZED
-            }, {
-                validationResult.value = LoginValidation.USER_NOT_FOUND
-            })
+        disposables.add(
+            repository.login(name, password)
+                .subscribeOn(Schedulers.io())
+                .observeOn(AndroidSchedulers.mainThread())
+                .subscribe(
+                    {
+                        repository.saveTokenToSharedPrefs(it)
+                        validationResult.value = LoginValidation.AUTHORIZED
+                    },
+                    {
+                        validationResult.value = LoginValidation.USER_NOT_FOUND
+                    })
         )
     }
 

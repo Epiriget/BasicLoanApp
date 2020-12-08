@@ -15,7 +15,6 @@ import javax.inject.Inject
 class LoanListViewModel @Inject constructor(
     private val repository: LoanRepository
 ) : ViewModel() {
-    // Todo: make private setter
     val loans = MutableLiveData<List<LoanBodyResponse>>()
     private val disposables = CompositeDisposable()
 

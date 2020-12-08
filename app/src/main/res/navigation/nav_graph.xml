@@ -16,6 +16,11 @@
             android:id="@+id/action_registrationFragment_to_loginFragment"
             app:launchSingleTop="true"
             app:destination="@id/loginFragment" />
+        <action
+            android:id="@+id/action_registrationFragment_to_loanListFragment"
+            app:popUpTo="@id/loanListFragment"
+            app:popUpToInclusive="true"
+            app:destination="@id/loanListFragment" />
     </fragment>
 
 

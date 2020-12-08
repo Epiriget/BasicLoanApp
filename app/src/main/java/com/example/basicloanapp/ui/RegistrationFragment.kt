@@ -10,6 +10,7 @@ import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.navigation.NavController
+import androidx.navigation.compose.navArgument
 import androidx.navigation.fragment.NavHostFragment
 import androidx.navigation.fragment.NavHostFragment.findNavController
 import androidx.navigation.fragment.findNavController
@@ -61,6 +62,7 @@ class RegistrationFragment : Fragment() {
     }
 
     private fun handleValidation(state: RegisterValidation) {
+        clearErrors()
         when(state) {
             RegisterValidation.ACCOUNT_ALREADY_EXISTS -> {
                 registration_name_input.error = state.message
@@ -72,20 +74,20 @@ class RegistrationFragment : Fragment() {
                 registration_error.visibility = View.VISIBLE
                 registration_error.text = state.message
             }
-            RegisterValidation.DEFAULT -> {
-                registration_name_input.error = null
-                registration_password_input.error = null
-                registration_error.visibility = View.GONE
+            RegisterValidation.GOOD -> {
+                navigateToList()
             }
         }
     }
 
-    private fun navigateToLogin(name: String?, password: String?) {
-        val bundle = Bundle().apply {
-            putString(Constants.NAME_KEY, name)
-            putString(Constants.PASSWORD_KEY, password)
-        }
-        navController.navigate(R.id.action_registrationFragment_to_loginFragment, bundle)
+    private fun clearErrors() {
+        registration_name_input.error = null
+        registration_password_input.error = null
+        registration_error.visibility = View.GONE
+    }
+
+    private  fun navigateToList() {
+        navController.navigate(R.id.action_registrationFragment_to_loanListFragment)
     }
 
     private fun navigateToLogin() {

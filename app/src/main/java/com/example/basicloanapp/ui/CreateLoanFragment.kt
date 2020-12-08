@@ -56,7 +56,7 @@ class CreateLoanFragment : BaseFragment() {
     }
 
     private fun handleValidation(state: CreateValidation) {
-        clearValidation()
+        clearErrors()
         when(state) {
             CreateValidation.AMOUNT_TYPE_ERROR -> {
                 _view.create_amount_input.error = state.message
@@ -83,7 +83,7 @@ class CreateLoanFragment : BaseFragment() {
         }
     }
 
-    private fun clearValidation() {
+    private fun clearErrors() {
         _view.create_amount_input.error = null
         _view.create_name_input.error = null
         _view.create_surname_input.error = null

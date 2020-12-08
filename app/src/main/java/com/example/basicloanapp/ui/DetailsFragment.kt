@@ -2,6 +2,7 @@ package com.example.basicloanapp.ui
 
 import android.content.Context
 import android.os.Bundle
+import android.provider.SyncStateContract
 import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
@@ -11,6 +12,7 @@ import androidx.lifecycle.ViewModelProvider
 
 import com.example.basicloanapp.R
 import com.example.basicloanapp.service.LoanBodyResponse
+import com.example.basicloanapp.util.Constants
 import kotlinx.android.synthetic.main.fragment_details.view.*
 import okhttp3.internal.notifyAll
 
@@ -21,6 +23,8 @@ class DetailsFragment : BaseFragment() {
     override fun onAttach(context: Context) {
         super.onAttach(context)
         model = ViewModelProvider(this, viewModelFactory)[DetailsViewModel::class.java]
+        val id = arguments?.getInt(Constants.DETAILS_ID_KEY)
+        model.getLoan(id ?: 0)
     }
 
     override fun onCreateView(
@@ -50,9 +54,12 @@ class DetailsFragment : BaseFragment() {
         _view.details_amount.text = res.getString(R.string.details_amount, loan.amount)
         _view.details_name.text = res.getString(R.string.details_name, loan.firstName)
         _view.details_surname.text = res.getString(R.string.details_surname, loan.lastName)
-        _view.details_percent.text = res.getString(R.string.details_amount, loan.percent)
+        _view.details_percent.text = res.getString(R.string.details_percent, loan.percent)
         _view.details_phone.text = res.getString(R.string.details_phone, loan.phoneNumber)
         _view.details_state.text = res.getString(R.string.details_state, loan.state)
+        // Todo: change date format
+        _view.details_date.text = res.getString(R.string.details_date, loan.date)
+        _view.details_period.text = res.getString(R.string.details_period, loan.period.toString())
     }
 
 }

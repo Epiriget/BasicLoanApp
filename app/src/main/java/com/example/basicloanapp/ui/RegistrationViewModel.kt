@@ -2,6 +2,7 @@ package com.example.basicloanapp.ui
 
 import android.content.SharedPreferences
 import android.util.Log
+import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.basicloanapp.data.LoanRepository
@@ -13,45 +14,33 @@ import javax.inject.Inject
 
 class RegistrationViewModel @Inject constructor(private val repository: LoanRepository): ViewModel() {
 
-    companion object {
-        private const val TAG = "RegistrationVM"
-    }
-
     private val disposables = CompositeDisposable()
 
-    // Todo: make livedata fields private with public getters
-    val isValid = MutableLiveData<Boolean>(false)
-    val validationResult = MutableLiveData<RegisterValidation>(RegisterValidation.DEFAULT)
+    private val _validationResult = MutableLiveData<RegisterValidation>()
+    val validationResult: LiveData<RegisterValidation>
+        get() = _validationResult
 
     fun register(name: String, password: String, repeatPassword: String) {
         if(validate(name, password, repeatPassword)) {
             disposables.add(repository.register(name, password)
                 .subscribeOn(Schedulers.io())
-                .observeOn(AndroidSchedulers.mainThread())
                 .subscribe(
                     {
-                        routeToLogin()
+                        _validationResult.postValue(RegisterValidation.GOOD)
+
                     },
                     {
-                        // Mock error text
                         if(it.message?.contains("404") == true) {
-                            validationResult.value = RegisterValidation.ACCOUNT_ALREADY_EXISTS
+                            _validationResult.postValue(RegisterValidation.ACCOUNT_ALREADY_EXISTS)
                         } else {
-                            validationResult.value = RegisterValidation.NETWORK
+                            _validationResult.postValue(RegisterValidation.NETWORK)
                         }
-                        Log.d(TAG, it.message?: "")
                     }
                 )
             )
-
         } else {
-            validationResult.value = RegisterValidation.NOT_EQUAL_PASSWORDS
+            _validationResult.value = RegisterValidation.NOT_EQUAL_PASSWORDS
         }
-    }
-
-    private fun routeToLogin() {
-        // Todo: implement routing to login page
-        Log.d(TAG, "RouteToLogin")
     }
 
     private fun validate(name: String, password: String, repeatPassword: String): Boolean {
@@ -68,5 +57,5 @@ enum class RegisterValidation(val message: String) {
     ACCOUNT_ALREADY_EXISTS("Account already exists!"),
     NOT_EQUAL_PASSWORDS("Passwords are not equal!"),
     NETWORK("Network or device problem, try again."),
-    DEFAULT("Default"),
+    GOOD("Good")
 }
