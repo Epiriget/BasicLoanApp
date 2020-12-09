@@ -14,6 +14,7 @@ interface GraphComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(registrationFragment: RegistrationFragment)
     fun inject(loginFragment: LoginFragment)
+    fun inject(splashFragment: SplashFragment)
     fun inject(loanListFragment: LoanListFragment)
     fun inject(baseFragment: BaseFragment)
 

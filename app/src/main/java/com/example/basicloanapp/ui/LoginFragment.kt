@@ -19,27 +19,22 @@ import kotlinx.android.synthetic.main.fragment_login.view.*
 import kotlinx.android.synthetic.main.fragment_registration.*
 import javax.inject.Inject
 
-class LoginFragment : Fragment() {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+class LoginFragment : BaseFragment() {
     private lateinit var model: LoginViewModel
-    private lateinit var navController: NavController
     private lateinit var _view: View
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as LoanApplication).repositoryComponent.inject(this)
         model = ViewModelProvider(this, viewModelFactory)[LoginViewModel::class.java]
-        val navHostFragment = requireActivity().supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
         _view = inflater.inflate(R.layout.fragment_login, container, false)
+        retainInstanceState()
 
         _view.button_login.setOnClickListener { model.login(
             login_name_input.editText?.text.toString(),
@@ -80,6 +75,27 @@ class LoginFragment : Fragment() {
             }
         }
     }
+
+    // Todo: Is it ok to save state here?
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        view?.apply {
+            model.saveState(
+                login_name_input.editText?.text.toString().trim(),
+                login_password_input.editText?.text.toString().trim()
+            )
+        }
+    }
+
+    private fun retainInstanceState() {
+        model.name.observe(viewLifecycleOwner, Observer {
+            view?.login_name_input?.editText?.setText(it)
+        })
+        model.password.observe(viewLifecycleOwner, Observer {
+            view?.login_password_input?.editText?.setText(it)
+        })
+    }
+
 
     private fun clearErrorFields() {
         _view.login_name_input.error = null

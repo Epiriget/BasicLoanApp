@@ -2,6 +2,7 @@ package com.example.basicloanapp.ui
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.basicloanapp.data.LoanRepository
 import io.reactivex.android.schedulers.AndroidSchedulers
@@ -10,14 +11,21 @@ import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
-    private val repository: LoanRepository
+    private val repository: LoanRepository,
+    private val state: SavedStateHandle
 ) : ViewModel() {
+    companion object {
+        private const val NAME_KEY = "login.state.name"
+        private const val PASSWORD_KEY = "login.state.password"
+    }
+
     private val disposables = CompositeDisposable()
 
     private val _validationResult = MutableLiveData<LoginValidation>()
-    val validationResult: LiveData<LoginValidation>
-        get() = _validationResult
+    val validationResult: LiveData<LoginValidation> = _validationResult
 
+    val name: LiveData<String> = state.getLiveData(NAME_KEY)
+    val password: LiveData<String> = state.getLiveData(PASSWORD_KEY)
 
     fun login(name: String, password: String) {
         val preValidation = validateInput(name, password)
@@ -37,6 +45,13 @@ class LoginViewModel @Inject constructor(
             )
         } else {
             _validationResult.value = preValidation
+        }
+    }
+
+    fun saveState(name: String?, password: String?) {
+        state.apply {
+            set(NAME_KEY, name)
+            set(PASSWORD_KEY, password)
         }
     }
 

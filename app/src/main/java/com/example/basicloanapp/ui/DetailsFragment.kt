@@ -31,6 +31,7 @@ class DetailsFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
         _view = inflater.inflate(R.layout.fragment_details, container, false)
 
         model.loan.observe(viewLifecycleOwner, Observer {

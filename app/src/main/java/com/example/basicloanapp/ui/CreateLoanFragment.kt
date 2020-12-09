@@ -26,6 +26,7 @@ class CreateLoanFragment : BaseFragment() {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
         _view = inflater.inflate(R.layout.fragment_create_loan, container, false)
         model.conditions.observe(viewLifecycleOwner, Observer {
             conditions = it

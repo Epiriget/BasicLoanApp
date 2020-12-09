@@ -37,6 +37,7 @@ class LoanListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_loan_list, container, false)
         setHasOptionsMenu(true)
         refreshLayout = view.refresh_layout.also {

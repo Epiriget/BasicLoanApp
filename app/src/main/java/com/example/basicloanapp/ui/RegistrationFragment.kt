@@ -17,33 +17,30 @@ import androidx.navigation.fragment.findNavController
 import com.example.basicloanapp.LoanApplication
 
 import com.example.basicloanapp.R
+import com.example.basicloanapp.di.ViewModelFactory
 import com.example.basicloanapp.util.Constants
+import dagger.Lazy
+import kotlinx.android.synthetic.main.fragment_details.*
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_registration.*
 import kotlinx.android.synthetic.main.fragment_registration.view.*
 import javax.inject.Inject
 
-class RegistrationFragment : Fragment() {
-    @Inject
-    lateinit var viewModelFactory: ViewModelProvider.Factory
+class RegistrationFragment : BaseFragment() {
     private lateinit var model: RegistrationViewModel
-    private lateinit var navController: NavController
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
-        (requireActivity().application as LoanApplication).repositoryComponent.inject(this)
-        // Todo: check whether it creates different instances of viewmodel
         model = ViewModelProvider(this, viewModelFactory)[RegistrationViewModel::class.java]
-        val navHostFragment = requireActivity().supportFragmentManager
-            .findFragmentById(R.id.nav_host_fragment) as NavHostFragment
-        navController = navHostFragment.navController
     }
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
+        super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_registration, container, false)
+        retainInstanceState()
 
         view.button_register.setOnClickListener {
             model.register(registration_name_input.editText?.text.toString().trim(),
@@ -60,7 +57,10 @@ class RegistrationFragment : Fragment() {
         }
         return view
     }
-    // Todo: Problem with localization
+
+
+
+    // Todo: Solve problem with localization
     private fun handleValidation(state: RegisterValidation) {
         clearErrors()
         when(state) {
@@ -88,6 +88,29 @@ class RegistrationFragment : Fragment() {
                 navigateToList()
             }
         }
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        view?.apply {
+            model.saveState(
+                registration_name_input.editText?.text.toString().trim(),
+                registration_password_input.editText?.text.toString().trim(),
+                registration_repeat_password_input.editText?.text.toString().trim()
+            )
+        }
+    }
+
+    private fun retainInstanceState() {
+        model.name.observe(viewLifecycleOwner, Observer {
+            view?.registration_name_input?.editText?.setText(it)
+        })
+        model.password.observe(viewLifecycleOwner, Observer {
+            view?.registration_password_input?.editText?.setText(it)
+        })
+        model.repeatPassword.observe(viewLifecycleOwner, Observer {
+            view?.registration_repeat_password_input?.editText?.setText(it)
+        })
     }
 
     private fun clearErrors() {
