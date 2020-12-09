@@ -53,7 +53,7 @@ class CreateLoanViewModel @Inject constructor(private val repository: LoanReposi
                     .subscribeOn(Schedulers.io())
                     .subscribe(
                         {
-                            _validationResult.value = CreateValidation.GOOD
+                            _validationResult.postValue(CreateValidation.GOOD)
                         },
                         {
                             _validationResult.postValue(CreateValidation.NETWORK)

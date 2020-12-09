@@ -35,8 +35,10 @@ class RegistrationViewModel @Inject constructor(
         if (preValidation == RegisterValidation.GOOD) {
             disposables.add(repository.register(name, password)
                 .subscribeOn(Schedulers.io())
+                .flatMap { repository.login(name, password) }
                 .subscribe(
                     {
+                        repository.saveTokenToSharedPrefs(it)
                         _validationResult.postValue(RegisterValidation.GOOD)
                     },
                     {
