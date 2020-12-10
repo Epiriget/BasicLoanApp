@@ -13,41 +13,47 @@
 
 
         <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/conditions_label"
-            style="@style/TextAppearance.MaterialComponents.Headline4"
+            android:id="@+id/conditions_percent_label"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_margin="12dp"
-            android:text="@string/conditions_label_text"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent" />
-
-        <com.google.android.material.textview.MaterialTextView
-            android:id="@+id/conditions_amount"
-            style="@style/InformationText"
-            android:layout_width="wrap_content"
-            android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/conditions_label"
-            tools:text="Max amount: 20000" />
+            android:textSize="@dimen/secondaryAccentText"
+            android:textColor="@color/secondaryAccentBlack"
+            app:layout_constraintStart_toStartOf="@id/conditions_percent"
+            app:layout_constraintBottom_toTopOf="@id/conditions_percent"
+            android:text="@string/conditions_percent_label" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/conditions_percent"
-            style="@style/InformationText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
+            android:layout_margin="32dp"
+            android:layout_marginStart="36dp"
+            android:textColor="@color/accentBlack"
+            android:textSize="30sp"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/conditions_amount"
-            tools:text="Loan rate: 10.5%" />
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="10.5%" />
+
+        <com.google.android.material.textview.MaterialTextView
+            android:id="@+id/conditions_period_label"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:textColor="@color/secondaryAccentBlack"
+            android:textSize="@dimen/secondaryAccentText"
+            app:layout_constraintStart_toStartOf="@id/conditions_period"
+            app:layout_constraintBottom_toTopOf="@id/conditions_period"
+            android:text="@string/conditions_period_label" />
 
         <com.google.android.material.textview.MaterialTextView
             android:id="@+id/conditions_period"
-            style="@style/InformationText"
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/conditions_percent"
-            tools:text="Period: 30 days" />
+            android:textColor="@color/accentBlack"
+            android:textSize="30sp"
+            android:layout_margin="32dp"
+            app:layout_constraintEnd_toEndOf="parent"
+            app:layout_constraintTop_toTopOf="parent"
+            tools:text="30 days" />
 
         <View
             android:id="@+id/conditions_separator"
@@ -55,7 +61,7 @@
             android:layout_height="1dp"
             style="@style/SeparatorLine"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/conditions_period" />
+            app:layout_constraintTop_toBottomOf="@id/conditions_percent" />
 
 
         <com.google.android.material.textfield.TextInputLayout
@@ -66,7 +72,6 @@
             android:layout_margin="12dp"
             android:hint="@string/hint_amount"
             app:errorEnabled="true"
-            app:helperText="@string/helper_amount"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toBottomOf="@id/conditions_separator">
 

@@ -11,6 +11,7 @@ import androidx.lifecycle.ViewModelProvider
 import com.example.basicloanapp.R
 import com.example.basicloanapp.service.LoanConditions
 import kotlinx.android.synthetic.main.fragment_create_loan.view.*
+import java.util.*
 
 class CreateLoanFragment : BaseFragment() {
     private lateinit var model: CreateLoanViewModel
@@ -28,6 +29,7 @@ class CreateLoanFragment : BaseFragment() {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         _view = inflater.inflate(R.layout.fragment_create_loan, container, false)
+        retainInstanceState()
         model.conditions.observe(viewLifecycleOwner, Observer {
             conditions = it
             setConditionFields(it)
@@ -51,7 +53,8 @@ class CreateLoanFragment : BaseFragment() {
     }
 
     private fun setConditionFields(conditions: LoanConditions) {
-        _view.conditions_amount.text = _view.resources.getString(R.string.conditions_amount, conditions.maxAmount)
+
+        _view.create_amount_input.helperText = _view.resources.getString(R.string.conditions_amount, conditions.maxAmount)
         _view.conditions_percent.text = _view.resources.getString(R.string.conditions_percent, conditions.percent)
         _view.conditions_period.text = _view.resources.getString(R.string.conditions_period, conditions.period)
     }
@@ -63,7 +66,7 @@ class CreateLoanFragment : BaseFragment() {
                 _view.create_amount_input.error = state.message
             }
             CreateValidation.AMOUNT_SIZE_ERROR -> {
-                _view.create_amount_input.error = state.message
+                _view.create_amount_input.error = state.message.format(conditions.maxAmount)
             }
             CreateValidation.NAME_EMPTY -> {
                 _view.create_name_input.error = state.message
@@ -90,6 +93,33 @@ class CreateLoanFragment : BaseFragment() {
         _view.create_surname_input.error = null
         _view.create_phone_input.error = null
         _view.create_error.visibility = View.INVISIBLE
+    }
+
+    override fun onSaveInstanceState(outState: Bundle) {
+        super.onSaveInstanceState(outState)
+        view?.apply {
+            model.saveState(
+                create_amount_input.editText?.text.toString(),
+                create_name_input.editText?.text.toString().trim(),
+                create_surname_input.editText?.text.toString().trim(),
+                create_phone_input.editText?.text.toString().trim()
+            )
+        }
+    }
+
+    private fun retainInstanceState() {
+        model.name.observe(viewLifecycleOwner, Observer {
+            view?.create_name_input?.editText?.setText(it)
+        })
+        model.surname.observe(viewLifecycleOwner, Observer {
+            view?.create_surname_input?.editText?.setText(it)
+        })
+        model.amount.observe(viewLifecycleOwner, Observer {
+            view?.create_amount_input?.editText?.setText(it)
+        })
+        model.phone.observe(viewLifecycleOwner, Observer {
+            view?.create_phone_input?.editText?.setText(it)
+        })
     }
 
     private fun navigateToList() {

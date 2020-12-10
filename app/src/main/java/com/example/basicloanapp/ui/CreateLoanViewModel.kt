@@ -3,6 +3,7 @@ package com.example.basicloanapp.ui
 import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
+import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.basicloanapp.domain.LoanUseCase
 import com.example.basicloanapp.service.LoanConditions
@@ -11,7 +12,10 @@ import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class CreateLoanViewModel @Inject constructor(private val useCase: LoanUseCase) :
+class CreateLoanViewModel @Inject constructor(
+    private val useCase: LoanUseCase,
+    private val state: SavedStateHandle
+) :
     ViewModel() {
     private val disposables = CompositeDisposable()
 
@@ -20,6 +24,19 @@ class CreateLoanViewModel @Inject constructor(private val useCase: LoanUseCase) 
 
     private val _validationResult = MutableLiveData<CreateValidation>()
     val validationResult: LiveData<CreateValidation> = _validationResult
+
+    val name: LiveData<String> = state.getLiveData(NAME_KEY)
+    val surname: LiveData<String> = state.getLiveData(SURNAME_KEY)
+    val amount: LiveData<String> = state.getLiveData(AMOUNT_KEY)
+    val phone: LiveData<String> = state.getLiveData(PHONE_KEY)
+
+    companion object {
+        private const val AMOUNT_KEY = "create.state.amount"
+        private const val NAME_KEY = "create.state.name"
+        private const val SURNAME_KEY = "create.state.surname"
+        private const val PHONE_KEY = "create.state.phone"
+    }
+
 
     init {
         getConditions()
@@ -68,14 +85,23 @@ class CreateLoanViewModel @Inject constructor(private val useCase: LoanUseCase) 
         surname: String,
         phone: String
     ): CreateValidation {
-        val amountInt: Int? = amount.toIntOrNull()
+        val amountLong: Long? = amount.toLongOrNull()
         return when {
-            amountInt == null -> CreateValidation.AMOUNT_TYPE_ERROR
-            amountInt > conditions.value!!.maxAmount -> CreateValidation.AMOUNT_SIZE_ERROR
+            amountLong == null -> CreateValidation.AMOUNT_TYPE_ERROR
+            amountLong > conditions.value!!.maxAmount -> CreateValidation.AMOUNT_SIZE_ERROR
             name.isEmpty() -> CreateValidation.NAME_EMPTY
             surname.isEmpty() -> CreateValidation.SURNAME_EMPTY
             phone.isEmpty() -> CreateValidation.PHONE_EMPTY
             else -> CreateValidation.GOOD
+        }
+    }
+
+    fun saveState(amount:String, name: String, surname: String, phone: String) {
+        state.apply {
+            set(AMOUNT_KEY, amount)
+            set(NAME_KEY, name)
+            set(SURNAME_KEY, surname)
+            set(PHONE_KEY, phone)
         }
     }
 
@@ -90,7 +116,7 @@ class CreateLoanViewModel @Inject constructor(private val useCase: LoanUseCase) 
 enum class CreateValidation(val message: String) {
     NETWORK("Error on server side, try again."),
     AMOUNT_TYPE_ERROR("Amount is empty!"),
-    AMOUNT_SIZE_ERROR("Amount is more than let in conditions!"),
+    AMOUNT_SIZE_ERROR("Amount is more than %d!"),
     NAME_EMPTY("Name is empty or consists of whitespaces!"),
     SURNAME_EMPTY("Surname is empty or consists of whitespaces!"),
     PHONE_EMPTY("Phone number is empty or consists of whitespaces!"),

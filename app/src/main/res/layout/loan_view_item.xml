@@ -13,8 +13,8 @@
         android:layout_margin="12dp"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent"
-        android:textSize="30sp"
-        android:textColor="#DD000000"
+        android:textSize="@dimen/accentText"
+        android:textColor="@color/accentBlack"
         tools:text="200.00₽"
         />
 
@@ -24,8 +24,8 @@
         app:layout_constraintStart_toStartOf="@id/item_amount"
         app:layout_constraintTop_toBottomOf="@id/item_amount"
         android:layout_height="wrap_content"
-        android:textColor="#CC000000"
-        android:textSize="18sp"
+        android:textColor="@color/secondaryAccentBlack"
+        android:textSize="@dimen/secondaryAccentText"
         android:text="@string/item_amount_label"
         />
 
