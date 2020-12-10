@@ -20,10 +20,9 @@
     <string name="item_approved">APPROVED</string>
     <string name="item_registered">REGISTERED</string>
     <string name="item_rejected">REJECTED</string>
-    <string name="item_amount">Amount: %1$d</string>
-    <string name="item_percent">at percent: %1$.2f</string>
-    <string name="item_date">Borrowed at: %1$s</string>
-    <string name="item_period">up to: %1$s</string>
+    <string name="item_amount">%1$d.00₽</string>
+    <string name="item_percent">Interest rate: %1$.2f%%</string>
+    <string name="item_date">Repayment date: %1$s</string>
 
     <!--Create Loan Fragment-->
     <string name="hint_amount">Amount to borrow</string>
@@ -50,4 +49,5 @@
     <string name="details_state">Current state: %1$s</string>
 
     <string name="menu_refresh">Refresh</string>
+    <string name="item_amount_label">Amount due</string>
 </resources>

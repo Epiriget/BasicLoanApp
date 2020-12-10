@@ -38,7 +38,6 @@ class LoanViewHolder(private val view: View, val onClick: (Int) -> Unit): Recycl
     private val amount = view.findViewById<TextView>(R.id.item_amount)
     private val date = view.findViewById<TextView>(R.id.item_date)
     private val percent = view.findViewById<TextView>(R.id.item_percent)
-    private val period = view.findViewById<TextView>(R.id.item_period)
     private val state = view.findViewById<TextView>(R.id.item_state)
 
     init {
@@ -51,10 +50,10 @@ class LoanViewHolder(private val view: View, val onClick: (Int) -> Unit): Recycl
 
     fun bind(loan: Loan) {
         currLoan = loan
+        val dateInDays = loan.toDate.split(" ")[0]
         amount.text = view.resources.getString(R.string.item_amount, loan.amount)
-        date.text = view.resources.getString(R.string.item_date, loan.date)
+        date.text = view.resources.getString(R.string.item_date, dateInDays)
         percent.text = view.resources.getString(R.string.item_percent, loan.percent)
-        period.text = view.resources.getString(R.string.item_period, loan.toDate)
 
         when(loan.state) {
             view.resources.getString(R.string.item_approved) -> {
