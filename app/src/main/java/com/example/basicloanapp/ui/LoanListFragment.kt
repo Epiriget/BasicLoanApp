@@ -16,6 +16,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 import com.example.basicloanapp.LoanApplication
 
 import com.example.basicloanapp.R
+import com.example.basicloanapp.domain.entity.Loan
 import com.example.basicloanapp.service.LoanBodyResponse
 import com.example.basicloanapp.util.Constants
 import kotlinx.android.synthetic.main.fragment_loan_list.*
@@ -52,7 +53,7 @@ class LoanListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
         initRecyclerView(adapter)
         model.loans.observe(viewLifecycleOwner, Observer {
-            adapter.submitList(it as MutableList<LoanBodyResponse>)
+            adapter.submitList(it as MutableList<Loan>)
             refreshLayout.isRefreshing = false
         })
 

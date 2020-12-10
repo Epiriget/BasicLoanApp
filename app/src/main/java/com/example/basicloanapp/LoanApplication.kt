@@ -9,7 +9,6 @@ class LoanApplication: Application() {
         super.onCreate()
         repositoryComponent = DaggerGraphComponent.builder()
             .context(this)
-//            .applicationModule(ApplicationModule(this))
             .build()
     }
 }

@@ -9,7 +9,8 @@ import dagger.Component
 import javax.inject.Singleton
 
 @Singleton
-@Component(modules = [LoanRepositoryModule::class, ApplicationModule::class, ViewModelModule::class])
+@Component(modules = [LoanRepositoryModule::class, ApplicationModule::class,
+    ViewModelModule::class, UseCaseModule::class])
 interface GraphComponent {
     fun inject(mainActivity: MainActivity)
     fun inject(registrationFragment: RegistrationFragment)

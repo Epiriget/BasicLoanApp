@@ -4,24 +4,22 @@ import android.util.Log
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
-import com.example.basicloanapp.data.LoanRepository
+import com.example.basicloanapp.domain.LoanUseCase
 import com.example.basicloanapp.service.LoanConditions
 import com.example.basicloanapp.service.LoanCreateRequest
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
-class CreateLoanViewModel @Inject constructor(private val repository: LoanRepository) :
+class CreateLoanViewModel @Inject constructor(private val useCase: LoanUseCase) :
     ViewModel() {
     private val disposables = CompositeDisposable()
 
     private val _conditions = MutableLiveData<LoanConditions>()
-    val conditions: LiveData<LoanConditions>
-        get() = _conditions
+    val conditions: LiveData<LoanConditions> = _conditions
 
     private val _validationResult = MutableLiveData<CreateValidation>()
-    val validationResult: LiveData<CreateValidation>
-        get() = _validationResult
+    val validationResult: LiveData<CreateValidation> = _validationResult
 
     init {
         getConditions()
@@ -29,7 +27,7 @@ class CreateLoanViewModel @Inject constructor(private val repository: LoanReposi
 
     private fun getConditions() {
         disposables.add(
-            repository.getLoanConditions()
+            useCase.getLoanConditions()
                 .subscribeOn(Schedulers.io())
                 .subscribe(
                     {
@@ -49,7 +47,7 @@ class CreateLoanViewModel @Inject constructor(private val repository: LoanReposi
         if (preValidation == CreateValidation.GOOD) {
             val loan = LoanCreateRequest(amount.toInt(), name, surname, percent, period, phone)
             disposables.add(
-                repository.createLoan(loan)
+                useCase.createLoan(loan)
                     .subscribeOn(Schedulers.io())
                     .subscribe(
                         {

@@ -1,17 +1,17 @@
 package com.example.basicloanapp.ui
 
-import androidx.compose.runtime.savedinstancestate.savedInstanceState
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.basicloanapp.data.LoanRepository
+import com.example.basicloanapp.domain.AuthorizationUseCase
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class RegistrationViewModel @Inject constructor(
-    private val repository: LoanRepository,
+    private val useCase: AuthorizationUseCase,
     private val state: SavedStateHandle
 ) : ViewModel() {
 
@@ -33,12 +33,12 @@ class RegistrationViewModel @Inject constructor(
     fun register(name: String, password: String, repeatPassword: String) {
         val preValidation = validateInput(name, password, repeatPassword)
         if (preValidation == RegisterValidation.GOOD) {
-            disposables.add(repository.register(name, password)
+            disposables.add(useCase.register(name, password)
                 .subscribeOn(Schedulers.io())
-                .flatMap { repository.login(name, password) }
+                .flatMap { useCase.login(name, password) }
                 .subscribe(
                     {
-                        repository.saveTokenToSharedPrefs(it)
+                        useCase.saveToken(it)
                         _validationResult.postValue(RegisterValidation.GOOD)
                     },
                     {

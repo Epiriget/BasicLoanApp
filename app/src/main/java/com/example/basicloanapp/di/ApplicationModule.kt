@@ -18,7 +18,7 @@ class ApplicationModule {
     fun sharedPreferences(application: Application): SharedPreferences {
         return application.getSharedPreferences(Constants.PREFERENCES_KEY, Context.MODE_PRIVATE)
     }
-    @Singleton
+
     @Provides
     fun savedStateHandle(): SavedStateHandle {
         return SavedStateHandle()

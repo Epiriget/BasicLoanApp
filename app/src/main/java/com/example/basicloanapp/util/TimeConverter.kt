@@ -3,7 +3,6 @@ package com.example.basicloanapp.util
 import java.text.SimpleDateFormat
 import java.time.Instant
 import java.time.format.DateTimeFormatter
-import java.time.temporal.TemporalAccessor
 import java.util.*
 import java.util.concurrent.TimeUnit
 
@@ -13,7 +12,7 @@ class TimeConverter {
             val temporalAccessor = DateTimeFormatter.ISO_OFFSET_DATE_TIME.parse(timeIso)
             val date = Date.from(Instant.from(temporalAccessor))
             val dataFormatter = SimpleDateFormat("dd.MM.yyyy HH:mm")
-            return dataFormatter.format(date) + TimeUnit.DAYS.toMillis(daysOffset)
+            return dataFormatter.format(date.time + TimeUnit.DAYS.toMillis(daysOffset))
         }
     }
 }

@@ -2,19 +2,18 @@ package com.example.basicloanapp.ui
 
 import android.content.Context
 import android.os.Bundle
-import android.provider.SyncStateContract
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 import com.example.basicloanapp.R
+import com.example.basicloanapp.domain.entity.Loan
 import com.example.basicloanapp.service.LoanBodyResponse
 import com.example.basicloanapp.util.Constants
 import kotlinx.android.synthetic.main.fragment_details.view.*
-import okhttp3.internal.notifyAll
 
 class DetailsFragment : BaseFragment() {
     private lateinit var model: DetailsViewModel
@@ -49,7 +48,7 @@ class DetailsFragment : BaseFragment() {
         navController.navigate(R.id.action_detailsFragment_to_loanListFragment)
     }
 
-    private fun initFields(loan: LoanBodyResponse) {
+    private fun initFields(loan: Loan) {
         val res = _view.resources
 
         _view.details_amount.text = res.getString(R.string.details_amount, loan.amount)
@@ -60,7 +59,7 @@ class DetailsFragment : BaseFragment() {
         _view.details_state.text = res.getString(R.string.details_state, loan.state)
         // Todo: change date format
         _view.details_date.text = res.getString(R.string.details_date, loan.date)
-        _view.details_period.text = res.getString(R.string.details_period, loan.period.toString())
+        _view.details_period.text = res.getString(R.string.details_period, loan.toDate)
     }
 
 }

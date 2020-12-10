@@ -8,10 +8,11 @@ import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basicloanapp.R
+import com.example.basicloanapp.domain.entity.Loan
 import com.example.basicloanapp.service.LoanBodyResponse
 
 class LoanAdapter(private val onClick: (Int) ->  Unit):
-    ListAdapter<LoanBodyResponse, LoanViewHolder>(LoanDiffCallback) {
+    ListAdapter<Loan, LoanViewHolder>(LoanDiffCallback) {
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): LoanViewHolder {
         return LoanViewHolder.create(parent, onClick)
@@ -21,19 +22,19 @@ class LoanAdapter(private val onClick: (Int) ->  Unit):
         holder.bind(getItem(position))
     }
 
-    object LoanDiffCallback: DiffUtil.ItemCallback<LoanBodyResponse>() {
-        override fun areItemsTheSame( oldItem: LoanBodyResponse, newItem: LoanBodyResponse): Boolean {
+    object LoanDiffCallback: DiffUtil.ItemCallback<Loan>() {
+        override fun areItemsTheSame( oldItem: Loan, newItem: Loan): Boolean {
             return oldItem == newItem
         }
 
-        override fun areContentsTheSame(oldItem: LoanBodyResponse, newItem: LoanBodyResponse): Boolean {
+        override fun areContentsTheSame(oldItem: Loan, newItem: Loan): Boolean {
             return oldItem.id == newItem.id
         }
     }
 }
 
 class LoanViewHolder(private val view: View, val onClick: (Int) -> Unit): RecyclerView.ViewHolder(view) {
-    private var currLoan: LoanBodyResponse? = null
+    private var currLoan: Loan? = null
     private val amount = view.findViewById<TextView>(R.id.item_amount)
     private val date = view.findViewById<TextView>(R.id.item_date)
     private val percent = view.findViewById<TextView>(R.id.item_percent)
@@ -48,12 +49,12 @@ class LoanViewHolder(private val view: View, val onClick: (Int) -> Unit): Recycl
         }
     }
 
-    fun bind(loan: LoanBodyResponse) {
+    fun bind(loan: Loan) {
         currLoan = loan
         amount.text = view.resources.getString(R.string.item_amount, loan.amount)
         date.text = view.resources.getString(R.string.item_date, loan.date)
         percent.text = view.resources.getString(R.string.item_percent, loan.percent)
-        period.text = view.resources.getString(R.string.item_period, loan.period)
+        period.text = view.resources.getString(R.string.item_period, loan.toDate)
 
         when(loan.state) {
             view.resources.getString(R.string.item_approved) -> {

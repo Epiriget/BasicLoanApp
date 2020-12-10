@@ -5,13 +5,14 @@ import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
 import com.example.basicloanapp.data.LoanRepository
+import com.example.basicloanapp.domain.AuthorizationUseCase
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
 import javax.inject.Inject
 
 class LoginViewModel @Inject constructor(
-    private val repository: LoanRepository,
+    private val useCase: AuthorizationUseCase,
     private val state: SavedStateHandle
 ) : ViewModel() {
     companion object {
@@ -31,12 +32,12 @@ class LoginViewModel @Inject constructor(
         val preValidation = validateInput(name, password)
         if(preValidation == LoginValidation.GOOD) {
             disposables.add(
-                repository.login(name, password)
+                useCase.login(name, password)
                     .subscribeOn(Schedulers.io())
                     .observeOn(AndroidSchedulers.mainThread())
                     .subscribe(
                         {
-                            repository.saveTokenToSharedPrefs(it)
+                            useCase.saveToken(it)
                             _validationResult.value = LoginValidation.GOOD
                         },
                         {
