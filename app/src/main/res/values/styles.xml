@@ -8,7 +8,10 @@
         <item name="colorAccent">@color/colorAccent</item>
     </style>
 
-    <style name="InformationText" parent="TextAppearance.MaterialComponents.Headline6">
+    <style name="InformationText">
+        <item name="android:textColor">@color/accentBlack</item>
+        <item name="android:textSize">24dp</item>
+
         <item name="android:layout_marginStart">12dp</item>
         <item name="android:layout_marginTop">8dp</item>
         <item name="android:layout_marginBottom">8dp</item>
@@ -19,14 +22,20 @@
         <item name="android:textColor">@color/design_default_color_error</item>
     </style>
 
-    <style name="TransitionButton" parent="TextAppearance.MaterialComponents.Button">
-        <item name="android:layout_marginStart">12dp</item>
-    </style>
-
     <style name="SeparatorLine">
         <item name="android:layout_marginTop">20dp</item>
         <item name="android:layout_marginBottom">20dp</item>
         <item name="android:background">@color/colorPrimaryDark</item>
+    </style>
+
+    <style name="primaryText">
+        <item name="android:textColor">@color/accentBlack</item>
+        <item name="android:textSize">@dimen/accentText</item>
+    </style>
+
+    <style name="secondaryText">
+        <item name="android:textColor">@color/secondaryAccentBlack</item>
+        <item name="android:textSize">@dimen/secondaryAccentText</item>
     </style>
 
 

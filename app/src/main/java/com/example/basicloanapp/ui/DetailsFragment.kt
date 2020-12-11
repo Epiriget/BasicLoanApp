@@ -57,9 +57,15 @@ class DetailsFragment : BaseFragment() {
         _view.details_percent.text = res.getString(R.string.details_percent, loan.percent)
         _view.details_phone.text = res.getString(R.string.details_phone, loan.phoneNumber)
         _view.details_state.text = res.getString(R.string.details_state, loan.state)
-        // Todo: change date format
         _view.details_date.text = res.getString(R.string.details_date, loan.date)
-        _view.details_period.text = res.getString(R.string.details_period, loan.toDate)
+        _view.details_period.text = res.getString(R.string.details_period, loan.period)
+
+        val repayAmount: Int = (loan.amount.toDouble() * (100.0 + loan.percent) / 100).toInt()
+        _view.details_amount_repay.text = res.getString(R.string.details_amount, repayAmount)
+        _view.details_date_repay.text = res.getString(R.string.details_date, loan.toDate)
+
+        _view.details_layout.visibility = View.VISIBLE
+        _view.details_progress_bar.visibility = View.GONE
     }
 
 }

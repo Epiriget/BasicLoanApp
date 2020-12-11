@@ -3,7 +3,7 @@
     <color name="colorPrimary">#aeea00</color>
     <color name="colorPrimaryDark">#79b700</color>
     <color name="colorPrimaryLight">#e4ff54</color>
-    <color name="colorAccent">#ff5349</color>
+    <color name="colorAccent">#aeea00</color>
 
     <color name="itemApproved">#4CBB17</color>
     <color name="itemRegistered">#FFD300</color>

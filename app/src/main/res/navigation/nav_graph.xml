@@ -55,6 +55,7 @@
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_loanListFragment_to_detailsFragment"
+            app:popUpTo="@id/detailsFragment"
             app:destination="@id/detailsFragment" />
     </fragment>
 

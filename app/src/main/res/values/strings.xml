@@ -1,5 +1,5 @@
 <resources>
-    <string name="app_name">BasicLoanApp</string>
+    <string name="app_name">3-Minute Loan</string>
     <string name="hello_blank_fragment">Hello blank fragment</string>
 
 
@@ -37,20 +37,26 @@
     <string name="conditions_percent">%1$.2f%%</string>
 
     <!--Details Fragment-->
-    <string name="personal_details_label">Personal Details:</string>
+    <string name="details_personal_label">Personal Details:</string>
     <string name="details_back_button">Back</string>
     <string name="loan_details_label">Loan Details:</string>
     <string name="details_name">Name: %1$s</string>
     <string name="details_surname">Surname: %1$s</string>
     <string name="details_phone">Phone Number: %1$s</string>
-    <string name="details_amount">Amount: %1$d</string>
-    <string name="details_percent">Loan Rate: %1$.2f %%</string>
-    <string name="details_date">Borrowed at: %1$s</string>
-    <string name="details_period">Repayment date: %1$s</string>
-    <string name="details_state">Current state: %1$s</string>
+    <string name="details_amount">%1$d₽</string>
+    <string name="details_percent">%1$.2f %%</string>
+    <string name="details_date">%1$s</string>
+    <string name="details_period">%1$d days</string>
+    <string name="details_state">State: %1$s</string>
+    <string name="details_period_label">Period</string>
+    <string name="details_percent_label">Interest rate</string>
+    <string name="details_date_repay_label">Repayment Date</string>
+    <string name="details_amount_repay_label">Repayment</string>
+    <string name="details_date_label">Date of the loan</string>
+    <string name="details_amount_label">Amount</string>
 
+    <string name="conditions_period_label">Period</string>
     <string name="menu_refresh">Refresh</string>
     <string name="conditions_amount">"Maximum amount: %1$d "</string>
-    <string name="conditions_percent_label">Loan rate:</string>
-    <string name="conditions_period_label">Period:</string>
+    <string name="conditions_percent_label">Loan rate</string>
 </resources>

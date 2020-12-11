@@ -1,101 +1,210 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<FrameLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    android:orientation="vertical"
     tools:context=".ui.DetailsFragment">
 
-    <com.google.android.material.textview.MaterialTextView
-        style="@style/TextAppearance.MaterialComponents.Headline4"
-        android:layout_marginStart="12dp"
+    <androidx.core.widget.NestedScrollView
+        android:id="@+id/details_layout"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/personal_details_label" />
+        android:visibility="gone"
+        android:layout_height="match_parent">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/details_name"
-        style="@style/InformationText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/details_name"
-        tools:text="Name: SomeName" />
+        <androidx.constraintlayout.widget.ConstraintLayout
+            android:layout_width="match_parent"
+            android:layout_height="match_parent">
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/details_surname"
-        style="@style/InformationText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/details_surname"
-        tools:text="Surname: SomeSurname" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/details_amount"
+                style="@style/primaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="@string/details_amount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="2000.00₽" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/details_phone"
-        style="@style/InformationText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/details_phone"
-        tools:text="Phone Number: 8923535346" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/details_amount_label"
+                style="@style/secondaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/details_amount_label"
+                app:layout_constraintStart_toStartOf="@id/details_amount"
+                app:layout_constraintTop_toBottomOf="@id/details_amount" />
 
-    <View
-        android:layout_width="match_parent"
-        android:layout_height="1dp"
-        style="@style/SeparatorLine"
-        />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/details_date"
+                style="@style/InformationText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="@string/details_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toTopOf="parent"
+                tools:text="21.12.2020 13:51" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/details_date_label"
+                style="@style/secondaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/details_date_label"
+                app:layout_constraintStart_toStartOf="@id/details_date"
+                app:layout_constraintTop_toBottomOf="@id/details_date" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/details_amount_repay"
+                style="@style/primaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="@string/details_amount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_amount_label"
+                tools:text="2200.05₽" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/details_amount_repay_label"
+                style="@style/secondaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/details_amount_repay_label"
+                app:layout_constraintStart_toStartOf="@id/details_amount_repay"
+                app:layout_constraintTop_toBottomOf="@id/details_amount_repay" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/details_date_repay"
+                style="@style/InformationText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="@string/details_date"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_amount_label"
+                tools:text="21.01.2021 13:51" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/details_date_repay_label"
+                style="@style/secondaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/details_date_repay_label"
+                app:layout_constraintStart_toStartOf="@id/details_date_repay"
+                app:layout_constraintTop_toBottomOf="@id/details_date_repay" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/details_percent"
+                style="@style/primaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="@string/details_amount"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_amount_repay_label"
+                tools:text="10.5%" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/details_percent_label"
+                style="@style/secondaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/details_percent_label"
+                app:layout_constraintStart_toStartOf="@id/details_percent"
+                app:layout_constraintTop_toBottomOf="@id/details_percent" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/details_period"
+                style="@style/primaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="12dp"
+                android:layout_marginBottom="12dp"
+                android:text="@string/details_period"
+                app:layout_constraintBaseline_toBaselineOf="@id/details_percent"
+                app:layout_constraintStart_toStartOf="@id/details_date_repay_label"
+                tools:text="45 days" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/details_period_label"
+                style="@style/secondaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:text="@string/details_period_label"
+                app:layout_constraintStart_toStartOf="@id/details_period"
+                app:layout_constraintTop_toBottomOf="@id/details_period" />
+
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/details_state"
+                style="@style/primaryText"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="@string/details_state"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_period_label"
+                tools:text="State: ACCEPTED" />
 
 
-    <com.google.android.material.textview.MaterialTextView
-        android:layout_marginStart="12dp"
-        style="@style/TextAppearance.MaterialComponents.Headline4"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/loan_details_label" />
+            <View
+                android:id="@+id/details_separation"
+                style="@style/SeparatorLine"
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_state" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/details_amount"
-        style="@style/InformationText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/details_amount"
-        tools:text="Amount: 2000" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/details_percent"
-        style="@style/InformationText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/details_percent"
-        tools:text="Loan Rate: 10.5%" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/details_name"
+                style="@style/InformationText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                android:text="@string/details_name"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_separation"
+                tools:text="Name: SomeName" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/details_date"
-        style="@style/InformationText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/details_date"
-        tools:text="Borrowed at: 21.12.2020 13:21" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/details_surname"
+                style="@style/InformationText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/details_surname"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_name"
+                tools:text="Surname: SomeSurname" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/details_period"
-        style="@style/InformationText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/details_period"
-        tools:text="Loan repayment date: 21.01.2021 13.21" />
+            <com.google.android.material.textview.MaterialTextView
+                android:id="@+id/details_phone"
+                style="@style/InformationText"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:text="@string/details_phone"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_surname"
+                tools:text="Phone: 89235346346" />
 
-    <com.google.android.material.textview.MaterialTextView
-        android:id="@+id/details_state"
-        style="@style/InformationText"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="@string/details_state"
-        tools:text="Current state: APPROVED" />
+            <com.google.android.material.button.MaterialButton
+                android:id="@+id/details_back"
+                style="@style/TextAppearance.MaterialComponents.Button"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_margin="12dp"
+                android:text="@string/details_back_button"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@id/details_phone" />
 
-    <com.google.android.material.button.MaterialButton
-        android:id="@+id/details_back"
-        android:layout_width="wrap_content"
-        style="@style/TransitionButton"
-        android:layout_height="wrap_content"
-        android:text="@string/details_back_button" />
+        </androidx.constraintlayout.widget.ConstraintLayout>
+    </androidx.core.widget.NestedScrollView>
 
-</LinearLayout>
+        <ProgressBar
+            android:id="@+id/details_progress_bar"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_gravity="center_horizontal|center_vertical"  />
+</FrameLayout>
