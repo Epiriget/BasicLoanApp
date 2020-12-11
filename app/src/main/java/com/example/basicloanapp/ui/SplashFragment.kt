@@ -39,6 +39,7 @@ class SplashFragment : BaseFragment() {
                 navigateToRegistration()
             }
         })
+        model.authenticate()
         return inflater.inflate(R.layout.fragment_splash, container, false)
     }
 

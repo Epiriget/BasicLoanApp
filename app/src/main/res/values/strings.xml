@@ -22,7 +22,7 @@
     <string name="item_rejected">REJECTED</string>
     <string name="item_amount">%1$d.00₽</string>
     <string name="item_percent">Interest rate: %1$.2f%%</string>
-    <string name="item_date">Repayment date: %1$s</string>
+    <string name="item_date">Repayment: %1$s</string>
     <string name="item_amount_label">Amount due</string>
 
 
@@ -46,7 +46,7 @@
     <string name="details_amount">Amount: %1$d</string>
     <string name="details_percent">Loan Rate: %1$.2f %%</string>
     <string name="details_date">Borrowed at: %1$s</string>
-    <string name="details_period">Loan repayment date: %1$s</string>
+    <string name="details_period">Repayment date: %1$s</string>
     <string name="details_state">Current state: %1$s</string>
 
     <string name="menu_refresh">Refresh</string>
