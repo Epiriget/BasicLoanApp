@@ -31,6 +31,7 @@ class RegistrationViewModel @Inject constructor(
     val validationResult: LiveData<RegisterValidation> = _validationResult
 
     fun register(name: String, password: String, repeatPassword: String) {
+        _validationResult.value = RegisterValidation.AWAITING
         val preValidation = validateInput(name, password, repeatPassword)
         if (preValidation == RegisterValidation.GOOD) {
             disposables.add(useCase.register(name, password)
@@ -84,6 +85,7 @@ class RegistrationViewModel @Inject constructor(
 }
 
 enum class RegisterValidation(val message: String) {
+    AWAITING("Awaiting."),
     ACCOUNT_ALREADY_EXISTS("Account already exists!"),
     NOT_EQUAL_PASSWORDS("Passwords are not equal!"),
     NETWORK("Network or device problem, try again."),

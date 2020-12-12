@@ -3,8 +3,11 @@ package com.example.basicloanapp.ui
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
+import androidx.appcompat.app.ActionBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
@@ -17,11 +20,24 @@ class CreateLoanFragment : BaseFragment() {
     private lateinit var model: CreateLoanViewModel
     private lateinit var conditions: LoanConditions
     private lateinit var _view: View
+    private var actionBar: ActionBar? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
         model = ViewModelProvider(this, viewModelFactory)[CreateLoanViewModel::class.java]
     }
+
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        actionBar = (requireActivity() as MainActivity).supportActionBar
+        actionBar?.title = getString(R.string.create_title)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+        setHasOptionsMenu(true)
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            navigateToList()
+        }.isEnabled = true
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -107,6 +123,16 @@ class CreateLoanFragment : BaseFragment() {
         }
     }
 
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            android.R.id.home -> {
+                navigateToList()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     private fun retainInstanceState() {
         model.name.observe(viewLifecycleOwner, Observer {
             view?.create_name_input?.editText?.setText(it)
@@ -123,6 +149,8 @@ class CreateLoanFragment : BaseFragment() {
     }
 
     private fun navigateToList() {
+        actionBar?.setDisplayHomeAsUpEnabled(false)
+        actionBar?.title = getString(R.string.app_name)
         navController.navigate(R.id.action_createLoanFragment_to_loanListFragment)
     }
 }

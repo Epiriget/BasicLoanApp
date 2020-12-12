@@ -29,6 +29,7 @@ class LoginViewModel @Inject constructor(
     val password: LiveData<String> = state.getLiveData(PASSWORD_KEY)
 
     fun login(name: String, password: String) {
+        _validationResult.value = LoginValidation.AWAITING
         val preValidation = validateInput(name, password)
         if(preValidation == LoginValidation.GOOD) {
             disposables.add(
@@ -72,6 +73,7 @@ class LoginViewModel @Inject constructor(
 }
 
 enum class LoginValidation(val message: String) {
+    AWAITING("Awaiting."),
     USER_NOT_FOUND("There is no such user or password incorrect."),
     NAME_EMPTY("Name is empty or consists of whitespaces!"),
     PASSWORD_EMPTY("Password is empty or consists of whitespaces!"),

@@ -15,6 +15,7 @@
         <action
             android:id="@+id/action_registrationFragment_to_loginFragment"
             app:launchSingleTop="true"
+            app:popUpTo="@id/loginFragment"
             app:destination="@id/loginFragment" />
         <action
             android:id="@+id/action_registrationFragment_to_loanListFragment"
@@ -32,6 +33,7 @@
         <action
             android:id="@+id/action_loginFragment_to_registrationFragment"
             app:launchSingleTop="true"
+            app:popUpTo="@id/registrationFragment"
             app:destination="@id/registrationFragment" />
         <action
             android:id="@+id/action_loginFragment_to_loanListFragment"
@@ -48,9 +50,11 @@
         tools:layout="@layout/fragment_loan_list" >
         <action
             android:id="@+id/action_loanListFragment_to_createLoanFragment"
+            app:popUpTo="@id/createLoanFragment"
             app:destination="@id/createLoanFragment" />
         <action
             android:id="@+id/action_loanListFragment_to_loginFragment"
+            app:popUpToInclusive="true"
             app:popUpTo="@id/registrationFragment"
             app:destination="@id/loginFragment" />
         <action
@@ -66,6 +70,7 @@
         tools:layout="@layout/fragment_splash" >
         <action
             android:id="@+id/action_splashFragment_to_loanListFragment"
+            app:popUpToInclusive="true"
             app:popUpTo="@id/loanListFragment"
             app:destination="@id/loanListFragment" />
         <action
@@ -82,6 +87,8 @@
         <action
             android:id="@+id/action_createLoanFragment_to_loanListFragment"
             app:popUpToInclusive="true"
+            app:launchSingleTop="true"
+            app:popUpTo="@id/loanListFragment"
             app:destination="@id/loanListFragment" />
     </fragment>
 
@@ -92,6 +99,8 @@
         tools:layout="@layout/fragment_details" >
         <action
             android:id="@+id/action_detailsFragment_to_loanListFragment"
+            app:popUpToInclusive="true"
+            app:launchSingleTop="true"
             app:popUpTo="@id/loanListFragment"
             app:destination="@id/loanListFragment" />
     </fragment>

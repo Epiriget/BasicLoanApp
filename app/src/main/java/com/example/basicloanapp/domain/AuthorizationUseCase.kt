@@ -5,7 +5,7 @@ import com.example.basicloanapp.service.RegistrationResponse
 import io.reactivex.Single
 import javax.inject.Inject
 
-class AuthorizationUseCase @Inject constructor(private val repository: LoanRepository) :
+open class AuthorizationUseCase @Inject constructor(private val repository: LoanRepository) :
     BaseUseCase(repository) {
 
     fun register(name: String, password: String): Single<RegistrationResponse> {

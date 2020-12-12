@@ -5,11 +5,13 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
+import com.example.basicloanapp.R
 import com.example.basicloanapp.domain.LoanUseCase
 import com.example.basicloanapp.service.LoanConditions
 import com.example.basicloanapp.service.LoanCreateRequest
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
+import kotlinx.android.synthetic.main.fragment_details.view.*
 import javax.inject.Inject
 
 class CreateLoanViewModel @Inject constructor(

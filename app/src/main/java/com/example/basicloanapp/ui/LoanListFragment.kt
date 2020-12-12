@@ -3,25 +3,23 @@ package com.example.basicloanapp.ui
 import android.content.Context
 import android.os.Bundle
 import android.view.*
-import androidx.fragment.app.Fragment
 import android.widget.Toast
+import androidx.activity.addCallback
+import androidx.appcompat.app.ActionBar
+import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
 import androidx.recyclerview.widget.DividerItemDecoration
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
 import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
-import com.example.basicloanapp.LoanApplication
 
 import com.example.basicloanapp.R
 import com.example.basicloanapp.domain.entity.Loan
-import com.example.basicloanapp.service.LoanBodyResponse
 import com.example.basicloanapp.util.Constants
 import kotlinx.android.synthetic.main.fragment_loan_list.*
 import kotlinx.android.synthetic.main.fragment_loan_list.view.*
-import javax.inject.Inject
+
 
 class LoanListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
     private lateinit var model: LoanListViewModel
@@ -33,6 +31,12 @@ class LoanListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         model = ViewModelProvider(this, viewModelFactory)[LoanListViewModel::class.java]
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        setHasOptionsMenu(true)
+        requireActivity().onBackPressedDispatcher.addCallback(this){}.isEnabled = true
+    }
+
 
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
@@ -40,7 +44,6 @@ class LoanListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         val view = inflater.inflate(R.layout.fragment_loan_list, container, false)
-        setHasOptionsMenu(true)
         refreshLayout = view.refresh_layout.also {
             it.setOnRefreshListener(this)
             it.isRefreshing = true
@@ -53,12 +56,23 @@ class LoanListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
 
         initRecyclerView(adapter)
         model.loans.observe(viewLifecycleOwner, Observer {
+            validateList(it)
             adapter.submitList(it as MutableList<Loan>)
             refreshLayout.isRefreshing = false
         })
 
         view.fab.setOnClickListener { navigateToCreateLoan() }
         return view
+    }
+
+    private fun validateList(list: List<Loan>) {
+        if(list.isEmpty()) {
+            refreshLayout.visibility = View.GONE
+            list_empty_placeholder.visibility = View.VISIBLE
+        } else {
+            refreshLayout.visibility = View.VISIBLE
+            list_empty_placeholder.visibility = View.GONE
+        }
     }
 
     private fun adapterOnClick(id: Int) {

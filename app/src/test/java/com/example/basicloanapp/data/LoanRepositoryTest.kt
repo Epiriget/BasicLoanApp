@@ -1,8 +1,10 @@
-package com.example.basicloanapp.service
+package com.example.basicloanapp.data
 
 import android.content.SharedPreferences
 import com.example.basicloanapp.TestSchedulerRule
 import com.example.basicloanapp.data.LoanRepository
+import com.example.basicloanapp.service.LoanConditions
+import com.example.basicloanapp.service.LoanService
 import com.example.basicloanapp.util.Constants
 import com.nhaarman.mockitokotlin2.*
 import io.reactivex.Single
@@ -32,6 +34,24 @@ class LoanRepositoryTest {
         val actual = repository.getLoanConditions()
 
         val expected = conditions
+
+        actual
+            .test()
+            .assertValue(expected)
+    }
+
+    @Test
+    fun `login positive`() {
+        val service: LoanService = mock()
+        val sharedPrefs: SharedPreferences = mock()
+        whenever(service.login(any())).thenReturn(Single.just("Bearer 123"))
+        whenever(sharedPrefs.getString(eq(Constants.PREFERENCES_BEARER_KEY), any()))
+            .thenReturn("Bearer 123")
+        val repository = LoanRepository(service, sharedPrefs)
+
+        val actual = repository.login("SomeName", "SomeSurname")
+
+        val expected = "Bearer 123"
 
         actual
             .test()

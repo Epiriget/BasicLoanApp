@@ -1,16 +1,19 @@
 <resources>
 
-    <!-- Base application theme. -->
     <style name="AppTheme" parent="Theme.MaterialComponents.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
         <item name="colorPrimary">@color/colorPrimary</item>
         <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
         <item name="colorAccent">@color/colorAccent</item>
+        <item name="toolbarStyle">@style/customToolbar</item>
+    </style>
+
+    <style name="customToolbar" parent="@style/Widget.AppCompat.Toolbar">
+        <item name="titleTextColor">@color/accentBlack</item>
     </style>
 
     <style name="InformationText">
         <item name="android:textColor">@color/accentBlack</item>
-        <item name="android:textSize">24dp</item>
+        <item name="android:textSize">24sp</item>
 
         <item name="android:layout_marginStart">12dp</item>
         <item name="android:layout_marginTop">8dp</item>

@@ -68,6 +68,9 @@ class RegistrationFragment : BaseFragment() {
                 registration_error.visibility = View.VISIBLE
                 registration_error.text = state.message
             }
+            RegisterValidation.AWAITING -> {
+                registration_progress_bar.visibility = View.VISIBLE
+            }
             RegisterValidation.NOT_EQUAL_PASSWORDS -> {
                 registration_password_input.error = state.message
             }
@@ -118,6 +121,7 @@ class RegistrationFragment : BaseFragment() {
         registration_password_input.error = null
         registration_repeat_password_input.error = null
         registration_error.visibility = View.GONE
+        registration_progress_bar.visibility = View.INVISIBLE
     }
 
     private  fun navigateToList() {

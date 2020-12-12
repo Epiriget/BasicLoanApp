@@ -57,6 +57,9 @@ class LoginFragment : BaseFragment() {
     private fun handleValidation(state: LoginValidation?) {
         clearErrorFields()
         when(state) {
+            LoginValidation.AWAITING -> {
+                login_progress_bar.visibility = View.VISIBLE
+            }
             LoginValidation.USER_NOT_FOUND -> {
                 login_name_input.error = state.message
             }
@@ -101,6 +104,7 @@ class LoginFragment : BaseFragment() {
         _view.login_name_input.error = null
         login_password_input.error = null
         login_error.visibility = View.GONE
+        login_progress_bar.visibility = View.GONE
     }
 
     private fun navigateToRegistration() {

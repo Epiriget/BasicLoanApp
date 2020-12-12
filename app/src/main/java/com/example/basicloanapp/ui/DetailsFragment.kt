@@ -3,9 +3,12 @@ package com.example.basicloanapp.ui
 import android.content.Context
 import android.os.Bundle
 import android.view.LayoutInflater
+import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
+import androidx.appcompat.app.ActionBar
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
@@ -13,11 +16,13 @@ import com.example.basicloanapp.R
 import com.example.basicloanapp.domain.entity.Loan
 import com.example.basicloanapp.service.LoanBodyResponse
 import com.example.basicloanapp.util.Constants
+import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_details.view.*
 
 class DetailsFragment : BaseFragment() {
     private lateinit var model: DetailsViewModel
     private lateinit var _view: View
+    private var actionBar: ActionBar? = null
 
     override fun onAttach(context: Context) {
         super.onAttach(context)
@@ -26,12 +31,33 @@ class DetailsFragment : BaseFragment() {
         model.getLoan(id ?: 0)
     }
 
+    override fun onCreate(savedInstanceState: Bundle?) {
+        super.onCreate(savedInstanceState)
+        actionBar = (requireActivity() as MainActivity).supportActionBar
+        actionBar?.title = getString(R.string.details_title)
+        actionBar?.setDisplayHomeAsUpEnabled(true)
+        setHasOptionsMenu(true)
+        requireActivity().onBackPressedDispatcher.addCallback(this) {
+            navigateToList()
+        }.isEnabled = true
+    }
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        when(item.itemId) {
+            android.R.id.home -> {
+                navigateToList()
+            }
+        }
+        return super.onOptionsItemSelected(item)
+    }
+
     override fun onCreateView(
         inflater: LayoutInflater, container: ViewGroup?,
         savedInstanceState: Bundle?
     ): View? {
         super.onCreateView(inflater, container, savedInstanceState)
         _view = inflater.inflate(R.layout.fragment_details, container, false)
+
 
         model.loan.observe(viewLifecycleOwner, Observer {
             initFields(it)
@@ -44,7 +70,10 @@ class DetailsFragment : BaseFragment() {
         return _view
     }
 
+
     private fun navigateToList() {
+        actionBar?.setDisplayHomeAsUpEnabled(false)
+        actionBar?.title = getString(R.string.app_name)
         navController.navigate(R.id.action_detailsFragment_to_loanListFragment)
     }
 
