@@ -1,0 +1,91 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="app_name">3-Минутный Займ</string>
+    <string name="details_title">Детали займа</string>
+    <string name="list_title">История</string>
+    <string name="hello_blank_fragment">Hello blank fragment</string>
+
+
+    <!--Registration And Login Fragments -->
+    <string name="hint_password">Пароль</string>
+    <string name="hint_name">Имя</string>
+    <string name="hint_repeat_password">Повторите пароль</string>
+    <string name="label_register_new_profile">Создать новый профиль</string>
+    <string name="register_button">Зарегистрироваться</string>
+    <string name="redirect_to_login_text">У меня уже есть профиль</string>
+    <string name="label_sign_in">Войти</string>
+    <string name="redirect_to_create_text">Создать новый профиль</string>
+    <string name="login_button">Войти</string>
+    <string name="registration_error">Возникла ошибка.</string>
+
+
+    <!--Items In Recycle View-->
+    <string name="item_approved">ОДОБРЕНО</string>
+    <string name="item_registered">РАССМОТРЕНО</string>
+    <string name="item_rejected">ОТКЛОНЕНО</string>
+    <string name="item_amount">%1$d.00₽</string>
+    <string name="item_percent">Ставка: %1$.2f%%</string>
+    <string name="item_date">Дата возврата: %1$s</string>
+    <string name="item_amount_label">Сумма займа</string>
+    <string name="list_empty_placeholder">Ваша история займов пуста.\nНажмите кнопку ниже чтобы создать.</string>
+
+
+    <!--Create Loan Fragment-->
+    <string name="create_title">Подать заявку на займ</string>
+    <string name="hint_amount">Сумма</string>
+    <string name="hint_surname">Фамилия</string>
+    <string name="hint_phone">Телефон</string>
+    <string name="create_button_text">Получить</string>
+    <string name="conditions_period">%1$d дней</string>
+    <string name="conditions_percent">%1$.2f%%</string>
+    <string name="conditions_amount">"Максимальная сумма: %1$d "</string>
+    <string name="conditions_percent_label">Ставка займа</string>
+    <string name="conditions_period_label">Период</string>
+
+    <!--Details Fragment-->
+    <string name="details_back_button">Назад</string>
+    <string name="details_name">Имя: %1$s</string>
+    <string name="details_surname">Фамилия: %1$s</string>
+    <string name="details_phone">Телефонный номер: %1$s</string>
+    <string name="details_amount">%1$d₽</string>
+    <string name="details_percent">%1$.2f %%</string>
+    <string name="details_date">%1$s</string>
+    <string name="details_period">%1$d дней</string>
+    <string name="details_state">Статус: %1$s</string>
+    <string name="details_period_label">Период</string>
+    <string name="details_percent_label">Ставка займа</string>
+    <string name="details_date_repay_label">Дата выплаты</string>
+    <string name="details_amount_repay_label">Сумма выплаты</string>
+    <string name="details_date_label">Дата выдачи займа</string>
+    <string name="details_amount_label">Сумма займа</string>
+
+
+    <!--Validation-->
+    <string name="create_validation_network">Ошибка в соединении, попробуйте снова.</string>
+    <string name="create_validation_amount_type_error">Сумма пуста!</string>
+    <string name="create_validation_amount_size_error">Сумма больше чем %d!</string>
+    <string name="create_validation_name_empty">Имя пусто или состоит из пробелов!</string>
+    <string name="create_validation_surname_empty">Фамилия пуста или состоит из пробелов!</string>
+    <string name="create_validation_phone_empty">Номер пуст или состоит из пробелов!</string>
+    <string name="validation_good">Good</string>
+    <string name="validation_awaiting">Awaiting.</string>
+    <string name="login_validation_user_not_found">Такого пользователя нет или пароль некорректен.</string>
+    <string name="validation_name_empty">Имя пусто или состоит из пробелов</string>
+    <string name="validation_password_empty">Пароль пуст или состоит из пробелов</string>
+    <string name="validation_network">Ошибка в соединении, попробуйте снова.</string>
+    <string name="register_validation_account_exists">Профиль уже существует!</string>
+    <string name="register_validation_not_equal_passwords">Пароли не совпадают!</string>
+
+
+    <!--Menus and settings-->
+    <string name="menu_refresh">Обновить</string>
+    <string name="history_title">История</string>
+    <string name="menu_logout">Выйти</string>
+    <string name="menu_settings">Настройки</string>
+    <string name="settings_dark_theme">Темная тема</string>
+    <string name="settings_localization">Язык</string>
+    <string name="settings_name">Настройки</string>
+    <string name="settings_category_header">Пользовательские предпочтения</string>
+
+
+</resources>

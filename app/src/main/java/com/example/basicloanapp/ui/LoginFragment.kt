@@ -2,22 +2,17 @@ package com.example.basicloanapp.ui
 
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
+import androidx.activity.addCallback
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.fragment.NavHostFragment
-import com.example.basicloanapp.LoanApplication
 
 import com.example.basicloanapp.R
-import com.example.basicloanapp.util.Constants
+import com.example.basicloanapp.ui.validation.LoginValidation
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*
-import kotlinx.android.synthetic.main.fragment_registration.*
-import javax.inject.Inject
 
 class LoginFragment : BaseFragment() {
     private lateinit var model: LoginViewModel
@@ -41,6 +36,8 @@ class LoginFragment : BaseFragment() {
             login_password_input.editText?.text.toString())
         }
 
+        requireActivity().onBackPressedDispatcher.addCallback(this) {}.isEnabled = true
+
         _view.redirect_to_registration.setOnClickListener {
             navigateToRegistration()
         }
@@ -61,17 +58,17 @@ class LoginFragment : BaseFragment() {
                 login_progress_bar.visibility = View.VISIBLE
             }
             LoginValidation.USER_NOT_FOUND -> {
-                login_name_input.error = state.message
+                login_name_input.error = getString(state.message)
             }
             LoginValidation.NETWORK -> {
                 login_error.visibility = View.VISIBLE
-                login_error.text = state.message
+                login_error.text = getString(state.message)
             }
             LoginValidation.NAME_EMPTY -> {
-                login_name_input.error = state.message
+                login_name_input.error = getString(state.message)
             }
             LoginValidation.PASSWORD_EMPTY -> {
-                login_password_input.error = state.message
+                login_password_input.error = getString(state.message)
             }
             LoginValidation.GOOD -> {
                 navigateToLoanList()

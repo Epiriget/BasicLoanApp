@@ -4,7 +4,7 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.example.basicloanapp.data.LoanRepository
+import com.example.basicloanapp.R
 import com.example.basicloanapp.domain.AuthorizationUseCase
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -84,13 +84,13 @@ class RegistrationViewModel @Inject constructor(
     }
 }
 
-enum class RegisterValidation(val message: String) {
-    AWAITING("Awaiting."),
-    ACCOUNT_ALREADY_EXISTS("Account already exists!"),
-    NOT_EQUAL_PASSWORDS("Passwords are not equal!"),
-    NETWORK("Network or device problem, try again."),
-    NAME_EMPTY("Name is empty or consists of whitespaces!"),
-    PASSWORD_EMPTY("Password is empty or consists of whitespaces!"),
-    REPEAT_PASSWORD_EMPTY("Password is empty or consists of whitespaces!"),
-    GOOD("Good")
+enum class RegisterValidation(val message: Int) {
+    AWAITING(R.string.validation_awaiting),
+    ACCOUNT_ALREADY_EXISTS(R.string.register_validation_account_exists),
+    NOT_EQUAL_PASSWORDS(R.string.register_validation_not_equal_passwords),
+    NETWORK(R.string.validation_network),
+    NAME_EMPTY(R.string.validation_name_empty),
+    PASSWORD_EMPTY(R.string.validation_password_empty),
+    REPEAT_PASSWORD_EMPTY(R.string.validation_password_empty),
+    GOOD(R.string.validation_good)
 }

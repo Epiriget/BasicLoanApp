@@ -13,8 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 
 import com.example.basicloanapp.R
 import com.example.basicloanapp.service.LoanConditions
+import com.example.basicloanapp.ui.validation.CreateValidation
 import kotlinx.android.synthetic.main.fragment_create_loan.view.*
-import java.util.*
 
 class CreateLoanFragment : BaseFragment() {
     private lateinit var model: CreateLoanViewModel
@@ -79,23 +79,23 @@ class CreateLoanFragment : BaseFragment() {
         clearErrorsFields()
         when(state) {
             CreateValidation.AMOUNT_TYPE_ERROR -> {
-                _view.create_amount_input.error = state.message
+                _view.create_amount_input.error = getString(state.message)
             }
             CreateValidation.AMOUNT_SIZE_ERROR -> {
-                _view.create_amount_input.error = state.message.format(conditions.maxAmount)
+                _view.create_amount_input.error = getString(state.message).format(conditions.maxAmount)
             }
             CreateValidation.NAME_EMPTY -> {
-                _view.create_name_input.error = state.message
+                _view.create_name_input.error = getString(state.message)
             }
             CreateValidation.SURNAME_EMPTY -> {
-                _view.create_surname_input.error = state.message
+                _view.create_surname_input.error = getString(state.message)
             }
             CreateValidation.PHONE_EMPTY -> {
-                _view.create_phone_input.error = state.message
+                _view.create_phone_input.error = getString(state.message)
             }
             CreateValidation.NETWORK -> {
                 _view.create_error.visibility = View.VISIBLE
-                _view.create_error.text = state.message
+                _view.create_error.text = getString(state.message)
             }
             CreateValidation.GOOD -> {
                 navigateToList()

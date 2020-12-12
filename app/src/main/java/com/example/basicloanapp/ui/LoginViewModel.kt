@@ -4,8 +4,8 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.example.basicloanapp.data.LoanRepository
 import com.example.basicloanapp.domain.AuthorizationUseCase
+import com.example.basicloanapp.ui.validation.LoginValidation
 import io.reactivex.android.schedulers.AndroidSchedulers
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
@@ -70,13 +70,4 @@ class LoginViewModel @Inject constructor(
         disposables.dispose()
         super.onCleared()
     }
-}
-
-enum class LoginValidation(val message: String) {
-    AWAITING("Awaiting."),
-    USER_NOT_FOUND("There is no such user or password incorrect."),
-    NAME_EMPTY("Name is empty or consists of whitespaces!"),
-    PASSWORD_EMPTY("Password is empty or consists of whitespaces!"),
-    NETWORK("Network or device problem, try again."),
-    GOOD("Good")
 }

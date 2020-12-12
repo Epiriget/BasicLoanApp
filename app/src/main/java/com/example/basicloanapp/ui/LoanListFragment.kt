@@ -101,6 +101,10 @@ class LoanListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
         navController.navigate(R.id.action_loanListFragment_to_loginFragment)
     }
 
+    private fun navigateToSettings() {
+        navController.navigate(R.id.action_loanListFragment_to_settingsFragment)
+    }
+
     override fun onRefresh() {
         model.getLoans()
     }
@@ -119,7 +123,12 @@ class LoanListFragment : BaseFragment(), SwipeRefreshLayout.OnRefreshListener {
             R.id.menu_logout -> {
                 logOut()
             }
+            R.id.menu_settings -> {
+                navigateToSettings()
+            }
         }
         return super.onOptionsItemSelected(item)
     }
+
+
 }

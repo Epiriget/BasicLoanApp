@@ -55,18 +55,22 @@ class LoanViewHolder(private val view: View, val onClick: (Int) -> Unit): Recycl
         date.text = view.resources.getString(R.string.item_date, dateInDays)
         percent.text = view.resources.getString(R.string.item_percent, loan.percent)
 
-        when(loan.state) {
-            view.resources.getString(R.string.item_approved) -> {
+        val stateText = when(loan.state) {
+            "APPROVED" -> {
                 state.setTextColor(view.resources.getColor(R.color.itemApproved))
+                view.resources.getString(R.string.item_approved)
             }
-            view.resources.getString(R.string.item_registered) -> {
+            "REGISTERED" -> {
                 state.setTextColor(view.resources.getColor(R.color.itemRegistered))
+                view.resources.getString(R.string.item_registered)
             }
-            view.resources.getString(R.string.item_rejected) -> {
+            "REJECTED" -> {
                 state.setTextColor(view.resources.getColor(R.color.itemRejected))
+                view.resources.getString(R.string.item_rejected)
             }
+            else -> ""
         }
-        state.text = loan.state
+        state.text = stateText
     }
 
     companion object {

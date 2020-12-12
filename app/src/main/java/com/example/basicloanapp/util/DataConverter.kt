@@ -6,6 +6,7 @@ import com.example.basicloanapp.service.LoanBodyResponse
 class DataConverter {
     companion object {
         fun convert(loan: LoanBodyResponse): Loan {
+
             return Loan(
                 amount = loan.amount,
                 date = TimeConverter.convertToDateWithTime(loan.date),

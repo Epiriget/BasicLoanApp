@@ -5,13 +5,12 @@ import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.SavedStateHandle
 import androidx.lifecycle.ViewModel
-import com.example.basicloanapp.R
 import com.example.basicloanapp.domain.LoanUseCase
 import com.example.basicloanapp.service.LoanConditions
 import com.example.basicloanapp.service.LoanCreateRequest
+import com.example.basicloanapp.ui.validation.CreateValidation
 import io.reactivex.disposables.CompositeDisposable
 import io.reactivex.schedulers.Schedulers
-import kotlinx.android.synthetic.main.fragment_details.view.*
 import javax.inject.Inject
 
 class CreateLoanViewModel @Inject constructor(
@@ -114,13 +113,3 @@ class CreateLoanViewModel @Inject constructor(
 
 }
 
-
-enum class CreateValidation(val message: String) {
-    NETWORK("Error on server side, try again."),
-    AMOUNT_TYPE_ERROR("Amount is empty!"),
-    AMOUNT_SIZE_ERROR("Amount is more than %d!"),
-    NAME_EMPTY("Name is empty or consists of whitespaces!"),
-    SURNAME_EMPTY("Surname is empty or consists of whitespaces!"),
-    PHONE_EMPTY("Phone number is empty or consists of whitespaces!"),
-    GOOD("Good")
-}

@@ -79,13 +79,18 @@ class DetailsFragment : BaseFragment() {
 
     private fun initFields(loan: Loan) {
         val res = _view.resources
-
+        val stateText = when(loan.state) {
+            "APPROVED" -> _view.resources.getString(R.string.item_approved)
+            "REGISTERED" -> _view.resources.getString(R.string.item_registered)
+            "REJECTED" -> _view.resources.getString(R.string.item_rejected)
+            else -> ""
+        }
         _view.details_amount.text = res.getString(R.string.details_amount, loan.amount)
         _view.details_name.text = res.getString(R.string.details_name, loan.firstName)
         _view.details_surname.text = res.getString(R.string.details_surname, loan.lastName)
         _view.details_percent.text = res.getString(R.string.details_percent, loan.percent)
         _view.details_phone.text = res.getString(R.string.details_phone, loan.phoneNumber)
-        _view.details_state.text = res.getString(R.string.details_state, loan.state)
+        _view.details_state.text = res.getString(R.string.details_state, stateText)
         _view.details_date.text = res.getString(R.string.details_date, loan.date)
         _view.details_period.text = res.getString(R.string.details_period, loan.period)
 

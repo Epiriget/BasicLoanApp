@@ -7,5 +7,7 @@ class Constants {
         const val PREFERENCES_KEY = "basicloanapp.prefs"
 
         const val DETAILS_ID_KEY = "details.id"
+
+        const val LOCALE_PREFERENCE_KEY = "basicloanapp.locale"
     }
 }

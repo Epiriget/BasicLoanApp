@@ -63,29 +63,30 @@ class RegistrationFragment : BaseFragment() {
     // Todo: Solve problem with localization
     private fun handleValidation(state: RegisterValidation) {
         clearErrors()
+        val message = getString(state.message)
         when(state) {
             RegisterValidation.ACCOUNT_ALREADY_EXISTS -> {
                 registration_error.visibility = View.VISIBLE
-                registration_error.text = state.message
+                registration_error.text = message
             }
             RegisterValidation.AWAITING -> {
                 registration_progress_bar.visibility = View.VISIBLE
             }
             RegisterValidation.NOT_EQUAL_PASSWORDS -> {
-                registration_password_input.error = state.message
+                registration_password_input.error = message
             }
             RegisterValidation.NETWORK -> {
                 registration_error.visibility = View.VISIBLE
-                registration_error.text = state.message
+                registration_error.text = message
             }
             RegisterValidation.NAME_EMPTY -> {
-                registration_name_input.error = state.message
+                registration_name_input.error = message
             }
             RegisterValidation.PASSWORD_EMPTY -> {
-                registration_password_input.error = state.message
+                registration_password_input.error = message
             }
             RegisterValidation.REPEAT_PASSWORD_EMPTY -> {
-                registration_repeat_password_input.error = state.message
+                registration_repeat_password_input.error = message
             }
             RegisterValidation.GOOD -> {
                 navigateToList()

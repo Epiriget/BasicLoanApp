@@ -1,4 +1,6 @@
+<?xml version="1.0" encoding="utf-8"?>
 <resources>
+
     <string name="app_name">3-Minute Loan</string>
     <string name="details_title">Loan Details</string>
     <string name="list_title">History</string>
@@ -87,13 +89,4 @@
     <string name="settings_category_header">User preferences</string>
 
 
-    <string-array name="settings_languages">
-        <item>English</item>
-        <item>Русский</item>
-    </string-array>
-
-    <string-array name="settings_languages_values">
-        <item>en</item>
-        <item>ru</item>
-    </string-array>
 </resources>
