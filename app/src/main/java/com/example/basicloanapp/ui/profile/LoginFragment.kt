@@ -1,4 +1,4 @@
-package com.example.basicloanapp.ui
+package com.example.basicloanapp.ui.profile
 
 import android.content.Context
 import android.os.Bundle
@@ -10,6 +10,7 @@ import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 
 import com.example.basicloanapp.R
+import com.example.basicloanapp.ui.BaseFragment
 import com.example.basicloanapp.ui.validation.LoginValidation
 import kotlinx.android.synthetic.main.fragment_login.*
 import kotlinx.android.synthetic.main.fragment_login.view.*

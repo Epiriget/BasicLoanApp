@@ -3,10 +3,14 @@ package com.example.basicloanapp.di
 import androidx.lifecycle.ViewModel
 import androidx.lifecycle.ViewModelProvider
 import com.example.basicloanapp.ui.*
+import com.example.basicloanapp.ui.loan.CreateLoanViewModel
+import com.example.basicloanapp.ui.loan.DetailsViewModel
+import com.example.basicloanapp.ui.loan.LoanListViewModel
+import com.example.basicloanapp.ui.profile.LoginViewModel
+import com.example.basicloanapp.ui.profile.RegistrationViewModel
 import dagger.Binds
 import dagger.MapKey
 import dagger.Module
-import dagger.Provides
 import dagger.multibindings.IntoMap
 import javax.inject.Inject
 import javax.inject.Provider

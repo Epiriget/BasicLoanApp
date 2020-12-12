@@ -1,4 +1,4 @@
-package com.example.basicloanapp.ui
+package com.example.basicloanapp.ui.loan
 
 import android.content.Context
 import android.os.Bundle
@@ -6,7 +6,6 @@ import android.view.LayoutInflater
 import android.view.MenuItem
 import android.view.View
 import android.view.ViewGroup
-import androidx.activity.OnBackPressedCallback
 import androidx.activity.addCallback
 import androidx.appcompat.app.ActionBar
 import androidx.lifecycle.Observer
@@ -14,9 +13,9 @@ import androidx.lifecycle.ViewModelProvider
 
 import com.example.basicloanapp.R
 import com.example.basicloanapp.domain.entity.Loan
-import com.example.basicloanapp.service.LoanBodyResponse
+import com.example.basicloanapp.ui.BaseFragment
+import com.example.basicloanapp.ui.MainActivity
 import com.example.basicloanapp.util.Constants
-import kotlinx.android.synthetic.main.activity_main.*
 import kotlinx.android.synthetic.main.fragment_details.view.*
 
 class DetailsFragment : BaseFragment() {

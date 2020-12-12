@@ -1,4 +1,4 @@
-package com.example.basicloanapp.ui
+package com.example.basicloanapp.ui.loan
 
 import android.content.Context
 import android.os.Bundle
@@ -13,6 +13,8 @@ import androidx.lifecycle.ViewModelProvider
 
 import com.example.basicloanapp.R
 import com.example.basicloanapp.service.LoanConditions
+import com.example.basicloanapp.ui.BaseFragment
+import com.example.basicloanapp.ui.MainActivity
 import com.example.basicloanapp.ui.validation.CreateValidation
 import kotlinx.android.synthetic.main.fragment_create_loan.view.*
 

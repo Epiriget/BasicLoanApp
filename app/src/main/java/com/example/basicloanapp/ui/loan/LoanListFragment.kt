@@ -1,12 +1,9 @@
-package com.example.basicloanapp.ui
+package com.example.basicloanapp.ui.loan
 
 import android.content.Context
 import android.os.Bundle
 import android.view.*
-import android.widget.Toast
 import androidx.activity.addCallback
-import androidx.appcompat.app.ActionBar
-import androidx.fragment.app.FragmentManager
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.DividerItemDecoration
@@ -16,6 +13,7 @@ import androidx.swiperefreshlayout.widget.SwipeRefreshLayout
 
 import com.example.basicloanapp.R
 import com.example.basicloanapp.domain.entity.Loan
+import com.example.basicloanapp.ui.BaseFragment
 import com.example.basicloanapp.util.Constants
 import kotlinx.android.synthetic.main.fragment_loan_list.*
 import kotlinx.android.synthetic.main.fragment_loan_list.view.*

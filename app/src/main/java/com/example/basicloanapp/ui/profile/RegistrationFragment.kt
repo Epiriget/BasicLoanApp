@@ -1,30 +1,17 @@
-package com.example.basicloanapp.ui
+package com.example.basicloanapp.ui.profile
 
-import android.app.Activity
 import android.content.Context
 import android.os.Bundle
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
 import androidx.lifecycle.Observer
 import androidx.lifecycle.ViewModelProvider
-import androidx.navigation.NavController
-import androidx.navigation.compose.navArgument
-import androidx.navigation.fragment.NavHostFragment
-import androidx.navigation.fragment.NavHostFragment.findNavController
-import androidx.navigation.fragment.findNavController
-import com.example.basicloanapp.LoanApplication
 
 import com.example.basicloanapp.R
-import com.example.basicloanapp.di.ViewModelFactory
-import com.example.basicloanapp.util.Constants
-import dagger.Lazy
-import kotlinx.android.synthetic.main.fragment_details.*
-import kotlinx.android.synthetic.main.fragment_login.*
+import com.example.basicloanapp.ui.BaseFragment
 import kotlinx.android.synthetic.main.fragment_registration.*
 import kotlinx.android.synthetic.main.fragment_registration.view.*
-import javax.inject.Inject
 
 class RegistrationFragment : BaseFragment() {
     private lateinit var model: RegistrationViewModel

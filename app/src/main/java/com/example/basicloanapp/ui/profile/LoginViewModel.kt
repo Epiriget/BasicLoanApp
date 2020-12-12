@@ -1,4 +1,4 @@
-package com.example.basicloanapp.ui
+package com.example.basicloanapp.ui.profile
 
 import androidx.lifecycle.LiveData
 import androidx.lifecycle.MutableLiveData

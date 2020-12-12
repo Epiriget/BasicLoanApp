@@ -1,4 +1,4 @@
-package com.example.basicloanapp.ui
+package com.example.basicloanapp.ui.loan
 
 import android.view.LayoutInflater
 import android.view.View
@@ -9,7 +9,6 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.basicloanapp.R
 import com.example.basicloanapp.domain.entity.Loan
-import com.example.basicloanapp.service.LoanBodyResponse
 
 class LoanAdapter(private val onClick: (Int) ->  Unit):
     ListAdapter<Loan, LoanViewHolder>(LoanDiffCallback) {

@@ -1,9 +1,10 @@
 package com.example.basicloanapp.di
 
 import android.app.Application
-import android.content.Context
 import com.example.basicloanapp.ui.*
-import dagger.Binds
+import com.example.basicloanapp.ui.loan.LoanListFragment
+import com.example.basicloanapp.ui.profile.LoginFragment
+import com.example.basicloanapp.ui.profile.RegistrationFragment
 import dagger.BindsInstance
 import dagger.Component
 import javax.inject.Singleton

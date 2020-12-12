@@ -9,7 +9,7 @@
 
     <fragment
         android:id="@+id/registrationFragment"
-        android:name="com.example.basicloanapp.ui.RegistrationFragment"
+        android:name="com.example.basicloanapp.ui.profile.RegistrationFragment"
         android:label="fragment_registration"
         tools:layout="@layout/fragment_registration" >
         <action
@@ -27,7 +27,7 @@
 
     <fragment
         android:id="@+id/loginFragment"
-        android:name="com.example.basicloanapp.ui.LoginFragment"
+        android:name="com.example.basicloanapp.ui.profile.LoginFragment"
         android:label="fragment_login"
         tools:layout="@layout/fragment_login" >
         <action
@@ -45,7 +45,7 @@
 
     <fragment
         android:id="@+id/loanListFragment"
-        android:name="com.example.basicloanapp.ui.LoanListFragment"
+        android:name="com.example.basicloanapp.ui.loan.LoanListFragment"
         android:label="fragment_loan_list"
         tools:layout="@layout/fragment_loan_list" >
         <action
@@ -85,7 +85,7 @@
 
     <fragment
         android:id="@+id/createLoanFragment"
-        android:name="com.example.basicloanapp.ui.CreateLoanFragment"
+        android:name="com.example.basicloanapp.ui.loan.CreateLoanFragment"
         android:label="fragment_create_loan"
         tools:layout="@layout/fragment_create_loan" >
         <action
@@ -98,7 +98,7 @@
 
     <fragment
         android:id="@+id/detailsFragment"
-        android:name="com.example.basicloanapp.ui.DetailsFragment"
+        android:name="com.example.basicloanapp.ui.loan.DetailsFragment"
         android:label="fragment_details"
         tools:layout="@layout/fragment_details" >
         <action

@@ -1,4 +1,4 @@
-package com.example.basicloanapp.ui
+package com.example.basicloanapp.ui.loan
 
 import android.content.SharedPreferences
 import android.util.Log
